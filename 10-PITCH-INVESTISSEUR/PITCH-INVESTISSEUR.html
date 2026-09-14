@@ -1,0 +1,354 @@
+<!doctype html>
+<title>PROD'AI Lab — Dossier investisseur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0E0E0F;
+    --ivory:#F5F1EC;
+    --paper:#FBF9F5;
+    --copper:#C4643F;
+    --copper-deep:#9b4a07;
+    --line:#E1DACD;
+    --ink-soft:#5b584f;
+    --card:#ffffff;
+    --ok:#3f6f52;
+    --ok-soft:#dfe9df;
+    --warn:#a3691f;
+    --warn-soft:#f2e3c8;
+    --hyp:#8a5a4a;
+    --hyp-soft:#f1e0d8;
+    --shadow:0 1px 2px rgba(14,14,15,.06), 0 10px 26px -14px rgba(14,14,15,.22);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ink:#f2ede2; --ivory:#15141a; --paper:#1a1920; --card:#201f27;
+      --line:#34323c; --ink-soft:#b3ada0; --copper:#e08a63; --copper-deep:#f2b088;
+      --ok:#8fc0a1; --ok-soft:#20302a; --warn:#e0b064; --warn-soft:#332a1a;
+      --hyp:#dba28f; --hyp-soft:#332622;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 14px 30px -16px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ink:#f2ede2; --ivory:#15141a; --paper:#1a1920; --card:#201f27;
+    --line:#34323c; --ink-soft:#b3ada0; --copper:#e08a63; --copper-deep:#f2b088;
+    --ok:#8fc0a1; --ok-soft:#20302a; --warn:#e0b064; --warn-soft:#332a1a;
+    --hyp:#dba28f; --hyp-soft:#332622;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 14px 30px -16px rgba(0,0,0,.6);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--ivory);color:var(--ink);font-family:"Inter",ui-sans-serif,system-ui,sans-serif;
+    font-size:16px;line-height:1.55;padding-inline:20px;}
+  h1,h2,h3{font-family:"Archivo",ui-sans-serif,sans-serif;text-wrap:balance;line-height:1.12;margin:0;letter-spacing:-.01em;}
+  .mono{font-family:"IBM Plex Mono",ui-monospace,monospace;}
+  a{color:var(--copper-deep);}
+  table{border-collapse:collapse;}
+
+  .wrap{max-width:900px;margin:0 auto;}
+
+  .banner{
+    max-width:900px;margin:18px auto 0;background:var(--hyp-soft);color:var(--hyp);
+    border:1px solid var(--hyp);border-radius:10px;padding:11px 16px;font-family:"IBM Plex Mono",monospace;
+    font-size:12px;letter-spacing:.02em;display:flex;gap:10px;align-items:baseline;
+  }
+  .banner b{color:var(--hyp);}
+
+  header.hero{max-width:900px;margin:0 auto;padding-block:38px 30px;border-bottom:2px solid var(--ink);}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--copper-deep);margin-bottom:14px;}
+  h1.title{font-size:clamp(2rem,5vw,2.9rem);max-width:16ch;font-weight:800;}
+  .tagline{font-family:"IBM Plex Mono",monospace;font-size:14px;color:var(--ink-soft);margin-top:8px;letter-spacing:.02em;}
+  .subtitle{margin-top:16px;max-width:58ch;font-size:1.08rem;color:var(--ink-soft);}
+  .founder-row{margin-top:24px;display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--ink-soft);
+    font-family:"IBM Plex Mono",monospace;}
+  .founder-row b{color:var(--ink);font-weight:600;}
+
+  nav.toc{position:sticky;top:0;z-index:20;background:color-mix(in srgb, var(--ivory) 90%, transparent);
+    backdrop-filter:blur(6px);border-bottom:1px solid var(--line);}
+  .toc-inner{max-width:900px;margin:0 auto;display:flex;gap:4px;overflow-x:auto;padding:9px 0;}
+  .toc-inner a{flex:none;font-family:"IBM Plex Mono",monospace;font-size:11px;text-decoration:none;
+    color:var(--ink-soft);padding:6px 11px;border-radius:100px;white-space:nowrap;border:1px solid transparent;}
+  .toc-inner a:hover{border-color:var(--line);color:var(--ink);}
+
+  section{max-width:900px;margin:0 auto;padding-block:40px;border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+  .kicker{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--copper-deep);letter-spacing:.08em;
+    text-transform:uppercase;margin-bottom:8px;}
+  h2.h{font-size:clamp(1.4rem,3vw,1.85rem);max-width:24ch;font-weight:700;}
+  .lede{color:var(--ink-soft);max-width:62ch;margin-top:10px;font-size:1rem;}
+  p{max-width:66ch;}
+
+  /* two-col problem/insight */
+  .duo{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px;}
+  .duo .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;box-shadow:var(--shadow);}
+  .duo .card h4{font-family:"IBM Plex Mono",monospace;font-size:11px;text-transform:uppercase;letter-spacing:.06em;
+    color:var(--copper-deep);margin-bottom:10px;}
+  .duo .card p{font-size:.95rem;margin:0;max-width:none;}
+  @media (max-width:640px){.duo{grid-template-columns:1fr;}}
+
+  /* concept doors */
+  .doors{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px;}
+  .door{border-radius:12px;padding:22px;box-shadow:var(--shadow);}
+  .door.lab{background:var(--ink);color:var(--ivory);}
+  .door.academy{background:var(--card);border:1px solid var(--line);}
+  .door .dk{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;opacity:.7;}
+  .door h3{font-size:1.3rem;margin:8px 0 6px;}
+  .door p{font-size:.92rem;margin:0 0 12px;max-width:none;}
+  .door.lab p{color:#d8d2c4;}
+  .door.academy p{color:var(--ink-soft);}
+  .door ul{margin:0;padding-left:18px;font-size:.87rem;}
+  .door.lab ul{color:#e9e4d8;}
+  .door.academy ul{color:var(--ink-soft);}
+  .bridge{margin-top:14px;font-size:.87rem;color:var(--ink-soft);font-family:"IBM Plex Mono",monospace;
+    text-align:center;}
+  @media (max-width:640px){.doors{grid-template-columns:1fr;}}
+
+  /* advantage grid */
+  .adv{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:24px;}
+  .adv .item{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;}
+  .adv .item .num{font-family:"IBM Plex Mono",monospace;color:var(--copper-deep);font-size:12px;}
+  .adv .item h4{font-size:.98rem;margin:6px 0 5px;font-family:"Archivo",sans-serif;}
+  .adv .item p{font-size:.87rem;color:var(--ink-soft);margin:0;max-width:none;}
+  @media (max-width:640px){.adv{grid-template-columns:1fr;}}
+
+  /* offer table */
+  .tiers{overflow-x:auto;margin-top:22px;}
+  table.tiers-t{width:100%;border-collapse:separate;border-spacing:0;min-width:640px;}
+  table.tiers-t th{text-align:left;font-family:"IBM Plex Mono",monospace;font-size:10.5px;text-transform:uppercase;
+    letter-spacing:.05em;color:var(--ink-soft);padding:8px 12px;border-bottom:2px solid var(--ink);}
+  table.tiers-t td{padding:14px 12px;border-bottom:1px solid var(--line);vertical-align:top;font-size:.9rem;}
+  table.tiers-t td.name{font-family:"Archivo",sans-serif;font-weight:700;color:var(--copper-deep);white-space:nowrap;}
+  table.tiers-t td.price{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:600;}
+
+  /* feasibility gradient */
+  .feas{margin-top:24px;display:flex;flex-direction:column;gap:10px;}
+  .flevel{display:grid;grid-template-columns:150px 1fr;gap:14px;align-items:start;border-radius:10px;padding:14px 16px;}
+  .flevel.ok{background:var(--ok-soft);} .flevel.ok .ftag{color:var(--ok);}
+  .flevel.warn{background:var(--warn-soft);} .flevel.warn .ftag{color:var(--warn);}
+  .flevel.hyp{background:var(--hyp-soft);} .flevel.hyp .ftag{color:var(--hyp);}
+  .ftag{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.05em;text-transform:uppercase;font-weight:600;padding-top:2px;}
+  .flevel p{margin:0;font-size:.88rem;max-width:none;}
+  .guardrail{margin-top:16px;border-left:3px solid var(--ink);padding:12px 16px;background:var(--card);
+    border-radius:0 8px 8px 0;font-size:.87rem;color:var(--ink-soft);}
+  @media (max-width:600px){.flevel{grid-template-columns:1fr;}}
+
+  /* mvp timeline */
+  .mvp{margin-top:24px;display:flex;flex-direction:column;gap:0;}
+  .mstep{display:grid;grid-template-columns:60px 1fr;gap:16px;padding-bottom:18px;position:relative;}
+  .mstep:last-child{padding-bottom:0;}
+  .mstep .when{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--copper-deep);font-weight:600;padding-top:2px;}
+  .mstep .bar{position:relative;}
+  .mstep .bar::before{content:"";position:absolute;left:0;top:6px;width:8px;height:8px;border-radius:50%;background:var(--copper);}
+  .mstep p{margin:0 0 0 20px;font-size:.9rem;max-width:none;}
+  .mstep:not(:last-child) .bar::after{content:"";position:absolute;left:3px;top:16px;bottom:-16px;width:1px;background:var(--line);}
+
+  /* vision */
+  .vision-row{display:flex;flex-direction:column;gap:10px;margin-top:22px;}
+  .vitem{display:grid;grid-template-columns:28px 1fr;gap:12px;font-size:.92rem;}
+  .vitem span.arrow{font-family:"IBM Plex Mono",monospace;color:var(--copper-deep);}
+
+  /* ask section */
+  .ask-head{background:var(--ink);color:var(--ivory);border-radius:14px;padding:28px 26px;margin-top:24px;
+    display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:14px;}
+  .ask-head .label{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#cfc8b8;}
+  .ask-head .amount{font-family:"Archivo",sans-serif;font-weight:800;font-size:clamp(2.2rem,6vw,3.2rem);color:var(--copper);}
+  .ask-head .for{font-size:.85rem;color:#cfc8b8;max-width:26ch;}
+
+  .funds{overflow-x:auto;margin-top:20px;}
+  table.funds-t{width:100%;border-collapse:collapse;min-width:520px;font-size:.87rem;}
+  table.funds-t th{text-align:left;font-family:"IBM Plex Mono",monospace;font-size:10.5px;text-transform:uppercase;
+    letter-spacing:.05em;color:var(--ink-soft);padding:7px 10px;border-bottom:1px solid var(--line);}
+  table.funds-t td{padding:9px 10px;border-bottom:1px solid var(--line);}
+  table.funds-t td.num{font-family:"IBM Plex Mono",monospace;text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;}
+  table.funds-t tr.total td{border-top:2px solid var(--ink);border-bottom:none;font-weight:700;padding-top:12px;}
+
+  .deal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px;}
+  .deal{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;}
+  .deal h4{font-size:.92rem;margin:0 0 6px;font-family:"Archivo",sans-serif;}
+  .deal p{font-size:.83rem;color:var(--ink-soft);margin:0;max-width:none;}
+  @media (max-width:700px){.deal-grid{grid-template-columns:1fr;}}
+
+  .downside{margin-top:18px;border-left:3px solid var(--ok);background:var(--ok-soft);border-radius:0 8px 8px 0;
+    padding:12px 16px;font-size:.87rem;}
+
+  footer{max-width:900px;margin:0 auto;padding-block:36px 56px;font-size:.83rem;color:var(--ink-soft);}
+  footer a{color:var(--ink-soft);}
+  footer ul{padding-left:18px;}
+  footer li{margin-bottom:5px;}
+</style>
+
+<div class="banner">⚠ <b>Document de travail</b> — le concept, l'offre et le MVP s'appuient sur des décisions déjà validées ; les chiffres financiers et le montant demandé (§08) sont une hypothèse de calcul à valider par Katerina avant tout envoi à un investisseur réel.</div>
+
+<header class="hero">
+  <div class="eyebrow">Dossier investisseur — 14 septembre 2026</div>
+  <h1 class="title">PROD'AI Lab</h1>
+  <div class="tagline">Concept · Produit · Système</div>
+  <p class="subtitle">Le studio qui construit — ou apprend à construire — le système opérationnel IA d'une petite entreprise, avec l'immobilier de prestige comme laboratoire de preuve.</p>
+  <div class="founder-row">
+    <span><b>Fondatrice</b> Katerina Rech</span>
+    <span><b>Stade</b> pré-amorçage, preuves en consolidation</span>
+    <span><b>Socle</b> Collection Privée — agence immobilière Qualiopi certifiée</span>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="toc-inner">
+    <a href="#probleme">01 Problème</a>
+    <a href="#concept">02 Concept</a>
+    <a href="#avantages">03 Avantages</a>
+    <a href="#offre">04 Offre</a>
+    <a href="#faisabilite">05 Faisabilité</a>
+    <a href="#mvp">06 MVP</a>
+    <a href="#vision">07 Vision</a>
+    <a href="#equipe">08 Équipe</a>
+    <a href="#ask">09 Demande</a>
+  </div>
+</nav>
+
+<section id="probleme">
+  <div class="kicker">01 — Le problème &amp; l'insight</div>
+  <h2 class="h">Tout le monde sait que l'IA arrive. Personne ne sait à qui la confier.</h2>
+  <div class="duo">
+    <div class="card"><h4>Le problème</h4><p>Les dirigeants de petites structures voient l'IA arriver mais ne savent ni par où commencer ni à qui confier le sujet. Les gros intégrateurs ne les servent pas (tickets trop élevés, minimum de volume) ; les formations génériques enseignent des prompts, pas des résultats.</p></div>
+    <div class="card"><h4>L'insight</h4><p>On n'achète pas de l'IA — on achète le résultat, et la tranquillité de ne pas rater le virage. L'immobilier sert de laboratoire de preuve parce que la fondatrice y a 10 ans de terrain réel, avant de généraliser la méthode à d'autres secteurs.</p></div>
+  </div>
+</section>
+
+<section id="concept">
+  <div class="kicker">02 — Le concept</div>
+  <h2 class="h">Deux portes, un même savoir-faire</h2>
+  <p class="lede">Même socle — « je conçois et je construis des systèmes complets, de zéro » — décliné en deux métiers distincts : on le construit, ou on apprend à le construire.</p>
+  <div class="doors">
+    <div class="door lab">
+      <div class="dk">Porte 1 — Done-for-you</div>
+      <h3>PROD'AI Lab</h3>
+      <p>« On le construit pour toi. »</p>
+      <ul>
+        <li>Vidéo IA (porte d'entrée)</li>
+        <li>Système opérationnel sur-mesure (l'« OS » du business)</li>
+        <li>Concept business clé en main</li>
+        <li>Créations signature — séries animées, avatar Luna</li>
+      </ul>
+    </div>
+    <div class="door academy">
+      <div class="dk">Porte 2 — Formation</div>
+      <h3>PROD'AI Academy</h3>
+      <p>« On t'apprend à le construire. » Programme Qualiopi, finançable OPCO.</p>
+      <ul>
+        <li>10 modules, du positionnement au scaling</li>
+        <li>Spécialisé immobilier — pas généraliste</li>
+        <li>Cohorte individuelle ou atelier d'équipe</li>
+      </ul>
+    </div>
+  </div>
+  <div class="bridge">celui qui apprend et cale → devient client Lab · un seul funnel, deux tickets</div>
+</section>
+
+<section id="avantages">
+  <div class="kicker">03 — Pourquoi maintenant, pourquoi elle</div>
+  <h2 class="h">Ce qu'aucun concurrent généraliste ne peut copier</h2>
+  <div class="adv">
+    <div class="item"><div class="num">01</div><h4>Une niche vide</h4><p>Aucun acteur identifié ne combine formation IA + agence opérationnelle + spécialisation immobilière (analyse comparative détaillée en annexe).</p></div>
+    <div class="item"><div class="num">02</div><h4>Qualiopi déjà en poche</h4><p>Certification obtenue via Collection Privée → financement OPCO, un argument qu'aucun concurrent de ce créneau ne possède.</p></div>
+    <div class="item"><div class="num">03</div><h4>Double expertise rare</h4><p>10 ans de terrain immobilier haut de gamme + conception de systèmes IA — pas un développeur qui découvre l'immobilier.</p></div>
+    <div class="item"><div class="num">04</div><h4>Productisé, pas sur-mesure infini</h4><p>Briques réutilisables (workflows, templates, modules) livrables en solo, extensibles si la demande monte.</p></div>
+  </div>
+</section>
+
+<section id="offre">
+  <div class="kicker">04 — L'offre</div>
+  <h2 class="h">Trois niveaux, un prix pour chacun</h2>
+  <p class="lede">Grille déjà consolidée à partir du benchmark marché — pas des chiffres de vitrine.</p>
+  <div class="tiers">
+    <table class="tiers-t">
+      <tr><th>Niveau</th><th>Pour qui</th><th>Contenu</th><th>Prix</th></tr>
+      <tr><td class="name">Autonomie</td><td>Veut apprendre à construire seul</td><td>PROD'AI Academy — cohorte individuelle ou atelier d'équipe (Qualiopi/OPCO)</td><td class="price">490 – 3 000 €</td></tr>
+      <tr><td class="name">Accélération</td><td>Veut une brique précise, vite</td><td>Un workflow / une automatisation (n8n) installée ou enseignée à l'équipe</td><td class="price">1 200 – 2 500 €</td></tr>
+      <tr><td class="name">Délégation</td><td>Veut que PROD'AI livre tout</td><td>Système opérationnel complet clé en main</td><td class="price">4 000 – 15 000 €</td></tr>
+    </table>
+  </div>
+  <p class="lede" style="margin-top:16px">Produit d'appel à faible friction : Vidéo IA à partir de 450 €, déjà vendue (Bouygues, Emerige — démonstrations, autorisations de citation en cours).</p>
+</section>
+
+<section id="faisabilite">
+  <div class="kicker">05 — Faisabilité</div>
+  <h2 class="h">Ce qui est prouvé, ce qui reste à prouver</h2>
+  <p class="lede">Inventaire honnête — pas de survente. Chaque brique est classée par niveau de preuve réel.</p>
+  <div class="feas">
+    <div class="flevel ok"><div class="ftag">Prouvé / pilote actif</div><p>Vidéo IA (productions réelles, démonstrations livrées) · Automatisation de qualification de leads (72 nœuds testés, candidatures suivies) · Avatar interactif en ligne sur un site réel, avec escalade humaine.</p></div>
+    <div class="flevel warn"><div class="ftag">En construction</div><p>Programme Academy / conformité Qualiopi du nouveau contenu (architecture décidée, modules à finaliser — voir cahier des charges dédié) · Système opérationnel complet (2 cas de démonstration à documenter en étude « avant/après »).</p></div>
+    <div class="flevel hyp"><div class="ftag">Hypothèse à valider</div><p>Vente de concepts business clé en main (méthode 19 étapes) — méthodologie testée, aucune vente externe encore prouvée.</p></div>
+  </div>
+  <div class="guardrail"><b>Garde-fou permanent :</b> jamais de promesse « autonome » ou « 24/7 » sans supervision prouvée. Chaque brique suit le même chemin : démo → pilote borné → cas client documenté → offre répétable.</div>
+</section>
+
+<section id="mvp">
+  <div class="kicker">06 — MVP · les 90 premiers jours</div>
+  <h2 class="h">Ce qui se construit avant tout financement lourd</h2>
+  <div class="mvp">
+    <div class="mstep"><div class="when">Semaine 1-4</div><div class="bar"><p>Fermer un premier cas client signé et documenté (vidéo cinématique) + filmer 3 témoignages, même informels.</p></div></div>
+    <div class="mstep"><div class="when">Semaine 4-8</div><div class="bar"><p>Mettre en ligne l'offre à 3 niveaux, le call de qualification, et une landing page avec tableau avant/après.</p></div></div>
+    <div class="mstep"><div class="when">Semaine 8-12</div><div class="bar"><p>Déposer le programme Academy (conformité Qualiopi) et publier les 10 premiers templates de la Library immobilier.</p></div></div>
+  </div>
+</section>
+
+<section id="vision">
+  <div class="kicker">07 — Vision</div>
+  <h2 class="h">De studio solo à portefeuille</h2>
+  <div class="vision-row">
+    <div class="vitem"><span class="arrow">→</span><span>Chaque système construit pour un client devient un template réutilisable dans la Library.</span></div>
+    <div class="vitem"><span class="arrow">→</span><span>Chaque concept business documenté (méthode 19 étapes) devient un actif revendable ou licenciable, indépendamment de l'immobilier.</span></div>
+    <div class="vitem"><span class="arrow">→</span><span>L'Academy se réplique sur d'autres verticales une fois la preuve immobilière consolidée — sans changer de méthode, seulement de terrain.</span></div>
+  </div>
+</section>
+
+<section id="equipe">
+  <div class="kicker">08 — Équipe</div>
+  <h2 class="h">Founder-market fit</h2>
+  <p class="lede">Katerina Rech — « Product Builder » : dix ans de terrain immobilier haut de gamme (Collection Privée, Qualiopi certifiée), bilingue FR/RU. Avant l'IA, le même mécanisme s'est déjà vérifié dans plusieurs univers — théâtre, marque florale, prêt-à-porter, franchise immobilière : voir le produit avant qu'il existe, structurer une idée floue, construire jusqu'au résultat livrable. L'IA n'est pas un changement de métier, c'est un nom posé sur ce qu'elle a toujours fait.</p>
+</section>
+
+<section id="ask">
+  <div class="kicker">09 — La demande</div>
+  <h2 class="h">Ce qu'on demande, et pourquoi</h2>
+  <div class="ask-head">
+    <div><div class="label">Montant demandé — hypothèse à valider</div><div class="amount">35 000 €</div></div>
+    <div class="for">Pour financer 12 mois d'exécution complète de la feuille de route (33 actions) sans dépendre du cash-flow client.</div>
+  </div>
+
+  <div class="funds">
+    <table class="funds-t">
+      <tr><th>Poste</th><th>Bas</th><th>Haut</th></tr>
+      <tr><td>Conformité Qualiopi du programme Academy</td><td class="num">1 500 €</td><td class="num">4 000 €</td></tr>
+      <tr><td>Outils &amp; abonnements (12 mois : n8n, Canva Pro, hébergement, crédits génératifs)</td><td class="num">2 400 €</td><td class="num">4 800 €</td></tr>
+      <tr><td>Production du MVP (landing page, études de cas, templates initiaux)</td><td class="num">3 000 €</td><td class="num">6 000 €</td></tr>
+      <tr><td>Acquisition (contenu sponsorisé, tests publicitaires, 12 mois)</td><td class="num">3 600 €</td><td class="num">7 200 €</td></tr>
+      <tr><td>Appui production part-temps (~10h/semaine, 12 mois)</td><td class="num">12 000 €</td><td class="num">16 800 €</td></tr>
+      <tr><td>Imprévus (15%)</td><td class="num">3 400 €</td><td class="num">5 800 €</td></tr>
+      <tr class="total"><td>Total</td><td class="num">≈ 26 000 €</td><td class="num">≈ 44 700 €</td></tr>
+    </table>
+  </div>
+
+  <p class="lede" style="margin-top:18px">Type de deal — à trancher par Katerina, trois pistes réalistes à cette échelle :</p>
+  <div class="deal-grid">
+    <div class="deal"><h4>Prêt d'honneur</h4><p>Réseau Entreprendre / Initiative France — 0%, sans garantie personnelle, sans dilution.</p></div>
+    <div class="deal"><h4>Love money / compte courant</h4><p>Apport d'un proche en compte courant d'associé, remboursable, sans prise de participation.</p></div>
+    <div class="deal"><h4>Business angel minoritaire</h4><p>Petite prise de participation si l'investisseur veut être associé à la croissance, à négocier au cas par cas.</p></div>
+  </div>
+
+  <p class="lede" style="margin-top:18px">Jalons de suivi : <b>M+1</b> premier cas fermé + 3 témoignages · <b>M+3</b> offre 3 niveaux en ligne + programme Academy déposé · <b>M+6</b> première cohorte Academy vendue · <b>M+12</b> portefeuille de clients Lab + point d'équilibre opérationnel.</p>
+
+  <div class="downside">Downside : les actifs construits (templates, programme Qualiopi, système technique) restent réutilisables et revendables indépendamment du résultat. Le revenu personnel de Katerina ne dépend pas de ce financement — Collection Privée reste le socle. Structure de coûts faible : solo, productisée, clients simultanés limités par choix.</div>
+</section>
+
+<footer>
+  <p><b>Sources internes</b> — grille tarifaire consolidée, feuille de route 33 actions, inventaire de maturité du 18 août 2026, analyse comparative brAIn Écosystème vs PROD'AI (dossier complet en annexe). Repo de travail : <a href="https://github.com/Nevada099/ProdAI" target="_blank" rel="noopener">github.com/Nevada099/ProdAI</a>.</p>
+  <p><b>Avant tout envoi à un investisseur réel :</b></p>
+  <ul>
+    <li>Valider chaque ligne du tableau de financement (§09) avec les coûts réels de Katerina.</li>
+    <li>Trancher le type de deal (prêt d'honneur / love money / business angel).</li>
+    <li>Obtenir les autorisations écrites avant de nommer un client en preuve (Bouygues, Emerige — démarche déjà lancée).</li>
+    <li>Documenter au moins un cas « avant/après » complet avant le premier envoi.</li>
+  </ul>
+</footer>
