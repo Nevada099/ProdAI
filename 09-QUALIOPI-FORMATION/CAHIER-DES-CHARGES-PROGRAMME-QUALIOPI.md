@@ -41,25 +41,37 @@
 
 ---
 
-## 3. Squelette Qualiopi — à compléter module par module
+## 3. Squelette Qualiopi — rempli pour les 10 modules
 
-Qualiopi exige, pour chaque module, un **objectif pédagogique mesurable**, pas juste un titre. Gabarit à remplir avant tout dépôt :
+Qualiopi exige, pour chaque module, un **objectif pédagogique mesurable**, pas juste un titre. Chaque ligne respecte le garde-fou de [`FAISABILITE-TECHNIQUE.md`](../02-OFFRES-ET-SERVICES/FAISABILITE-TECHNIQUE.md) : **on enseigne du supervisé et du borné, jamais de l'« autonome » ou du « 24/7 » sans preuve** — donc les objectifs pédagogiques des modules 5-7 (automatisation, agents) parlent de « configurer avec supervision », pas de « rendre autonome ».
 
-| Champ | Exemple (module 3) |
-|---|---|
-| **Objectif pédagogique** | « À l'issue du module, le stagiaire est capable de remplir une grille d'audit IA en 15 points sur sa propre agence et d'en tirer 3 priorités d'action » |
-| **Public visé / prérequis** | Agents et directeurs d'agence immobilière, aucun prérequis technique |
-| **Modalité** | Distanciel asynchrone (vidéo) + exercice pratique noté |
-| **Durée indicative** | 2h contenu + 1h exercice |
-| **Modalité d'évaluation** | Grille d'audit complétée et corrigée, quiz de validation |
-| **Moyens pédagogiques** | Vidéo HD, support téléchargeable (grille PDF), correction type |
+| # | Objectif pédagogique | Modalité | Durée | Évaluation |
+|---|---|---|---|---|
+| 1 | Identifier 3 usages concrets de l'IA applicables à sa propre agence et formuler sa légitimité de référent IA en interne | Distanciel asynchrone (vidéo) | 1h30 | Questionnaire de positionnement complété |
+| 2 | Produire un visuel et une vidéo courte IA à partir d'un listing réel, en respectant un gabarit de prompt fourni | Distanciel asynchrone + exercice pratique | 2h contenu + 1h30 exercice | Livrable rendu (1 visuel + 1 vidéo) noté sur grille |
+| 3 | Remplir une grille d'audit IA en 15 points sur sa propre agence et en tirer 3 priorités d'action | Distanciel asynchrone + exercice pratique noté | 2h contenu + 1h exercice | Grille d'audit complétée et corrigée |
+| 4 | Préparer une présentation interne de l'IA à son agence/réseau et anticiper 3 objections (image de marque, juridique, éthique) | Distanciel asynchrone + étude de cas | 1h30 | Plan de présentation évalué par grille |
+| 5 | Configurer, **avec supervision**, une automatisation n8n simple (relance, alerte ou classement) sur son propre cas d'usage | Distanciel asynchrone + atelier pratique guidé | 2h contenu + 2h atelier | Workflow n8n fonctionnel démontré |
+| 6 | Décrire le périmètre borné d'un agent IA (qualification de leads ou réponse DM) et ses limites de supervision obligatoires | Distanciel asynchrone + étude de cas | 1h30 | Quiz de validation + cas pratique commenté |
+| 7 | Utiliser Claude Code/Cowork pour organiser une tâche récurrente de son activité (veille, contenu) | Distanciel asynchrone + démonstration commentée | 1h30 | Restitution d'un cas d'usage personnel |
+| 8 | Construire une grille tarifaire pour sa propre offre IA immobilier et simuler un argumentaire de closing | Distanciel asynchrone + jeu de rôle (si atelier équipe) | 2h | Grille tarifaire personnelle produite |
+| 9 | Rédiger une séquence de prospection ciblée (LinkedIn/outbound) pour son activité IA immobilier | Distanciel asynchrone + exercice pratique | 1h30 | Séquence de 3 messages rédigée et corrigée |
+| 10 | Préparer un argumentaire de présentation à un réseau/franchise incluant l'argument de financement Qualiopi/OPCO | Distanciel asynchrone + étude de cas | 1h30 | Argumentaire évalué par grille |
 
-À dupliquer pour les 10 modules avant tout dossier. Autres briques Qualiopi transverses à ne pas oublier (statut : à faire, hors périmètre de ce document) :
-- Positionnement pré-formation (test de niveau/attentes à l'entrée)
-- Évaluation finale + attestation de fin de formation
-- Enquête de satisfaction stagiaires
-- Modalités d'accessibilité (référent handicap)
-- Feuilles d'émargement / preuve d'exécution si présentiel ou visio synchrone
+**Total programme** : ~19h de contenu + exercices — cohérent avec le format « cours en ligne » de la grille tarifaire (490-990 €, §4) et volontairement loin des 70h+ de brAIn (cf. §5).
+
+---
+
+## 3bis. Briques Qualiopi transverses (hors modules, obligatoires pour le dépôt)
+
+| Brique | Ce que c'est concrètement | Qui la porte | Statut |
+|---|---|---|---|
+| **Positionnement pré-formation** | Questionnaire court (attentes, niveau de départ) envoyé avant le premier module | Katerina — formulaire Notion/Typeform | 🔴 à créer |
+| **Évaluation finale** | Livrable de synthèse : le stagiaire présente son plan d'action IA immobilier à 90 jours, construit à partir des 10 livrables de modules | Katerina — grille de correction à écrire | 🔴 à créer |
+| **Attestation de fin de formation** | Document généré automatiquement à la validation de l'évaluation finale | Katerina — modèle à préparer une fois | 🔴 à créer |
+| **Enquête de satisfaction stagiaires** | Formulaire envoyé à J+7 après la fin | Katerina — Typeform/Google Form | 🔴 à créer |
+| **Référent handicap** | Personne identifiée + modalités d'adaptation (rythme, support alternatif) | Katerina elle-même, en solo, avec un protocole écrit d'adaptation | 🔴 à formaliser |
+| **Feuilles d'émargement** | Uniquement nécessaires pour les sessions synchrones (atelier d'équipe présentiel/visio) — pas pour le cours asynchrone individuel | Katerina | 🟡 à créer, format atelier seulement |
 
 ---
 
@@ -84,13 +96,70 @@ D'après `GRILLE-TARIFAIRE-MASTER-PRODAI.md` §8, deux formats existent déjà :
 
 ---
 
-## 6. Prochaines actions
+## 6. Plateforme &amp; outils — rester léger, pas de LMS lourd
 
-1. Katerina valide la liste des 10 modules (§2) et leurs titres définitifs.
-2. Remplir le gabarit Qualiopi (§3) pour chacun — commencer par les modules déjà sourcés (1, 2, 3, 5, 6, 8, 9, 10).
-3. Produire le contenu des 2 modules sans source existante (4 et 7).
-4. Router ce programme dans le dossier de certification Qualiopi existant (`Dropbox/QUALIOPI/`) une fois les modules figés.
+Cohérent avec le budget "outils" déjà posé dans [`10-PITCH-INVESTISSEUR/PITCH-INVESTISSEUR.html`](../10-PITCH-INVESTISSEUR/PITCH-INVESTISSEUR.html) (2 400-4 800 €/an) et avec l'inspection technique de brAIn (le vrai coût est dans la plateforme membre, pas la vitrine) :
+
+| Besoin | Outil recommandé | Pourquoi |
+|---|---|---|
+| Hébergement des modules (vidéo + supports) | Notion (pages par module) + vidéos hébergées Loom ou Vimeo privé | Pas de développement, coût quasi nul, éditable seule |
+| Suivi des stagiaires (positionnement, livrables, évaluation finale) | Airtable — une ligne par stagiaire | Déjà dans la stack recommandée pour la Library de templates (réutilisation d'outil) |
+| Format "atelier d'équipe" (synchrone) | Visio (Zoom/Meet) + feuille d'émargement Airtable | Seul format nécessitant une preuve d'exécution en temps réel |
+| Questionnaires (positionnement, satisfaction) | Typeform ou Google Form | Gratuit ou quasi, suffisant au volume actuel |
+| Communauté / cohorte (si plusieurs stagiaires en même temps) | Groupe fermé Telegram/WhatsApp — **pas de Skool** | Cohérent avec la décision déjà prise (cf. `ROADMAP-PRODAI-33-ACTIONS.md` Phase 5) : un outil dédié type Skool est trop énergivore pour le volume actuel |
+
+**Ne pas construire de plateforme sur-mesure** — chaque outil ci-dessus existe déjà dans la stack de Katerina ou coûte moins de 20 €/mois.
 
 ---
 
-*Lié à : `06-RECHERCHE-ET-BENCHMARKS/BrAIn-case-study/` (structure source) · `02-OFFRES-ET-SERVICES/OFFRE-Agence-et-Formation.md` (positionnement Offre B) · `02-OFFRES-ET-SERVICES/GRILLE-TARIFAIRE-MASTER-PRODAI.md` §8 (prix) · `07-SYSTEMES-ET-PROCESS/` (templates à transformer en modules).*
+## 7. Équipe pédagogique
+
+En solo, Qualiopi n'impose pas une équipe pédagogique nombreuse, mais exige des **rôles identifiés**, même portés par une seule personne :
+
+| Rôle Qualiopi | Qui | Remarque |
+|---|---|---|
+| Formatrice / conceptrice du programme | Katerina | Rôle principal |
+| Référent pédagogique | Katerina | À déclarer explicitement dans le dossier, même en solo |
+| Référent handicap | Katerina | Avec un protocole écrit d'adaptation (cf. §3bis) — pas besoin d'une personne dédiée à ce volume |
+| Correction des évaluations | Katerina | Pas d'obligation d'évaluateur externe à ce stade |
+
+**Point de vigilance** : la contrainte "solo ou +1 assistant" du plan maître (`00-PLAN-MAITRE.md`) s'applique aussi ici — si le nombre de stagiaires dépasse ce qu'une personne peut corriger/accompagner, prévoir un assistant pédagogique avant de scaler, pas après.
+
+---
+
+## 8. Calendrier de déploiement — aligné sur le MVP 90 jours
+
+Reprend directement le calendrier déjà posé dans `10-PITCH-INVESTISSEUR/PITCH-INVESTISSEUR.html` §06 :
+
+| Période | Action formation |
+|---|---|
+| Semaines 1-4 | Finaliser les 8 modules déjà sourcés (1, 2, 3, 5, 6, 8, 9, 10) — contenu vidéo + supports |
+| Semaines 4-6 | Produire les 2 modules sans source existante (4 — référent IA interne, 7 — méthode Claude Code) |
+| Semaines 6-8 | Créer les briques transverses (§3bis) : positionnement, évaluation finale, attestation, enquête satisfaction |
+| Semaines 8-10 | Monter le dossier de dépôt Qualiopi pour ce nouveau programme (dans `Dropbox/QUALIOPI/`) |
+| Semaines 10-12 | Premier test du programme sur 1-2 stagiaires pilotes avant ouverture officielle |
+
+---
+
+## 9. Checklist finale avant dépôt Qualiopi
+
+- [ ] Les 10 modules ont un objectif pédagogique mesurable rempli (§3)
+- [ ] Les briques transverses existent (positionnement, évaluation finale, attestation, satisfaction, référent handicap) (§3bis)
+- [ ] Le format et la durée sont cohérents avec le prix affiché (§4)
+- [ ] Aucune promesse "autonome" ou de résultat financier chiffré dans les supports (§5)
+- [ ] Le programme est routé dans le dossier de certification existant (`Dropbox/QUALIOPI/`)
+- [ ] Un test pilote (1-2 stagiaires) a été fait avant l'ouverture officielle
+
+---
+
+## 10. Prochaines actions
+
+1. Katerina valide la liste des 10 modules (§2) et les objectifs pédagogiques (§3).
+2. Produire le contenu des 2 modules sans source existante (4 et 7) — le reste part d'un actif déjà produit.
+3. Créer les briques transverses (§3bis) — aucune n'existe encore.
+4. Router ce programme dans le dossier de certification Qualiopi existant (`Dropbox/QUALIOPI/`) une fois les modules figés.
+5. Tester sur 1-2 stagiaires pilotes avant ouverture officielle (§8).
+
+---
+
+*Lié à : `06-RECHERCHE-ET-BENCHMARKS/BrAIn-case-study/` (structure source) · `02-OFFRES-ET-SERVICES/OFFRE-Agence-et-Formation.md` (positionnement Offre B) · `02-OFFRES-ET-SERVICES/GRILLE-TARIFAIRE-MASTER-PRODAI.md` §8 (prix) · `02-OFFRES-ET-SERVICES/FAISABILITE-TECHNIQUE.md` (garde-fous respectés en §3) · `10-PITCH-INVESTISSEUR/` (calendrier et budget) · `07-SYSTEMES-ET-PROCESS/` (templates à transformer en modules).*
