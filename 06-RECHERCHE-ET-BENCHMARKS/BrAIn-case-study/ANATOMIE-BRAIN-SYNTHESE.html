@@ -1,0 +1,630 @@
+<!doctype html>
+<title>Anatomie de brAIn</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#eeece3;
+    --paper-raised:#f8f7f1;
+    --ink:#1d2027;
+    --ink-soft:#4c4f57;
+    --line:#d8d4c6;
+    --accent:#a5661f;
+    --accent-ink:#5a3811;
+    --accent-soft:#e9dcc6;
+    --teal:#3f6f66;
+    --teal-soft:#dbe8e3;
+    --rust:#9c4f42;
+    --rust-soft:#efdcd7;
+    --code-bg:#22262f;
+    --code-ink:#e7e2d3;
+    --shadow: 0 1px 2px rgba(29,32,39,.06), 0 8px 24px -12px rgba(29,32,39,.18);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#14171d;
+      --paper-raised:#1b1f27;
+      --ink:#e9e5d8;
+      --ink-soft:#aeab9e;
+      --line:#333844;
+      --accent:#dda05a;
+      --accent-ink:#f2c894;
+      --accent-soft:#3a2e1c;
+      --teal:#8fbcb0;
+      --teal-soft:#22322e;
+      --rust:#c98a7c;
+      --rust-soft:#33221f;
+      --code-bg:#0e1015;
+      --code-ink:#d9d4c3;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 12px 30px -14px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#14171d;
+    --paper-raised:#1b1f27;
+    --ink:#e9e5d8;
+    --ink-soft:#aeab9e;
+    --line:#333844;
+    --accent:#dda05a;
+    --accent-ink:#f2c894;
+    --accent-soft:#3a2e1c;
+    --teal:#8fbcb0;
+    --teal-soft:#22322e;
+    --rust:#c98a7c;
+    --rust-soft:#33221f;
+    --code-bg:#0e1015;
+    --code-ink:#d9d4c3;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 12px 30px -14px rgba(0,0,0,.6);
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Public Sans", ui-sans-serif, system-ui, sans-serif;
+    font-size:16.5px;
+    line-height:1.6;
+    padding-inline:20px;
+  }
+  h1,h2,h3{
+    font-family:"Fraunces", Georgia, serif;
+    text-wrap:balance;
+    font-weight:600;
+    line-height:1.15;
+    margin:0;
+  }
+  .mono{font-family:"IBM Plex Mono", ui-monospace, monospace;}
+  a{color:var(--accent-ink);}
+  table{border-collapse:collapse;}
+  ::selection{background:var(--accent-soft);}
+
+  /* ---------- shell ---------- */
+  .wrap{max-width:920px;margin:0 auto;}
+  .wide{max-width:1080px;margin:0 auto;}
+
+  header.masthead{
+    max-width:920px;margin:0 auto;
+    padding-block:52px 34px;
+    border-bottom:1px solid var(--line);
+  }
+  .eyebrow{
+    display:flex;align-items:center;gap:10px;
+    font-family:"IBM Plex Mono", monospace;
+    font-size:12px;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--accent-ink);margin-bottom:18px;
+  }
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);flex:none;}
+  h1.title{
+    font-size:clamp(2.1rem, 5vw, 3.1rem);
+    max-width:14ch;
+  }
+  .subtitle{
+    margin-top:14px;max-width:56ch;
+    color:var(--ink-soft);font-size:1.08rem;
+  }
+  .meta-row{
+    margin-top:26px;display:flex;flex-wrap:wrap;gap:10px 26px;
+    font-family:"IBM Plex Mono", monospace;font-size:12px;color:var(--ink-soft);
+  }
+  .meta-row b{color:var(--ink);font-weight:600;}
+
+  /* ---------- toc ---------- */
+  nav.toc{
+    position:sticky;top:0;z-index:20;
+    background:color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .toc-inner{
+    max-width:920px;margin:0 auto;
+    display:flex;gap:4px;overflow-x:auto;
+    padding:10px 0;
+    scrollbar-width:thin;
+  }
+  .toc-inner a{
+    flex:none;
+    font-family:"IBM Plex Mono", monospace;font-size:11.5px;letter-spacing:.03em;
+    text-decoration:none;color:var(--ink-soft);
+    padding:7px 12px;border-radius:100px;
+    border:1px solid transparent;
+    white-space:nowrap;
+  }
+  .toc-inner a:hover{border-color:var(--line);color:var(--ink);}
+
+  section{
+    max-width:920px;margin:0 auto;
+    padding-block:46px;
+    border-bottom:1px solid var(--line);
+  }
+  section:last-of-type{border-bottom:none;}
+  .kicker{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:12px;color:var(--accent-ink);letter-spacing:.08em;text-transform:uppercase;
+    display:flex;align-items:baseline;gap:10px;margin-bottom:10px;
+  }
+  .kicker .num{font-size:12px;color:var(--ink-soft);}
+  h2.h{font-size:clamp(1.5rem,3.4vw,2rem);max-width:22ch;margin-bottom:6px;}
+  .lede{color:var(--ink-soft);max-width:62ch;margin-top:10px;font-size:1.02rem;}
+
+  p{max-width:68ch;}
+  .full p{max-width:none;}
+
+  /* ---------- stat strip ---------- */
+  .stats{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+    background:var(--line);border:1px solid var(--line);
+    border-radius:10px;overflow:hidden;margin-top:28px;
+  }
+  .stat{
+    background:var(--paper-raised);padding:18px 16px;
+    display:flex;flex-direction:column;gap:6px;
+  }
+  .stat .n{
+    font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;
+    font-size:1.5rem;font-weight:600;color:var(--accent-ink);
+  }
+  .stat .l{font-size:12px;color:var(--ink-soft);}
+  @media (max-width:640px){.stats{grid-template-columns:repeat(2,1fr);}}
+
+  /* ---------- layer diagram ---------- */
+  .layers{display:flex;flex-direction:column;gap:8px;margin-top:26px;}
+  .layer{
+    background:var(--paper-raised);border:1px solid var(--line);border-radius:10px;
+    padding:16px 18px;display:grid;grid-template-columns:34px 1fr;gap:14px;align-items:start;
+    box-shadow:var(--shadow);
+  }
+  .layer .ln{
+    font-family:"IBM Plex Mono",monospace;color:var(--accent-ink);font-weight:600;font-size:14px;
+    padding-top:2px;
+  }
+  .layer h3{font-size:1.02rem;margin-bottom:4px;}
+  .layer p{margin:0;color:var(--ink-soft);font-size:.95rem;max-width:60ch;}
+  .layer .tag{
+    display:inline-block;margin-top:8px;font-family:"IBM Plex Mono",monospace;font-size:10.5px;
+    letter-spacing:.04em;text-transform:uppercase;color:var(--teal);background:var(--teal-soft);
+    padding:3px 8px;border-radius:5px;
+  }
+
+  /* ---------- pillar grid ---------- */
+  .grid6{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:26px;}
+  .pillar{
+    background:var(--paper-raised);border:1px solid var(--line);border-radius:10px;
+    padding:16px;box-shadow:var(--shadow);
+  }
+  .pillar .pn{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-soft);}
+  .pillar h3{font-size:.98rem;margin:4px 0 6px;}
+  .pillar p{font-size:.87rem;color:var(--ink-soft);margin:0;max-width:none;}
+  @media (max-width:760px){.grid6{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:460px){.grid6{grid-template-columns:1fr;}}
+
+  .routes{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px;}
+  .route{border:1px solid var(--line);border-radius:10px;padding:16px;background:var(--paper-raised);}
+  .route h4{font-family:"Fraunces",serif;font-size:1.05rem;margin:0 0 6px;}
+  .route p{font-size:.88rem;color:var(--ink-soft);margin:0;}
+  @media (max-width:700px){.routes{grid-template-columns:1fr;}}
+
+  /* ---------- program list ---------- */
+  .prog{margin-top:22px;border-top:1px solid var(--line);}
+  .prog li{
+    list-style:none;display:grid;grid-template-columns:30px 1fr;gap:14px;
+    padding:11px 0;border-bottom:1px solid var(--line);align-items:baseline;
+  }
+  .prog{padding:0;margin:22px 0 0;}
+  .prog .pnum{font-family:"IBM Plex Mono",monospace;color:var(--accent-ink);font-size:13px;}
+  .prog .ptxt{font-size:.95rem;}
+
+  /* ---------- narrative arc ---------- */
+  .arc{margin-top:28px;display:flex;flex-direction:column;gap:0;}
+  .beat{
+    display:grid;grid-template-columns:26px 1fr;gap:16px;
+    position:relative;padding-bottom:22px;
+  }
+  .beat:last-child{padding-bottom:0;}
+  .beat .rail{
+    display:flex;flex-direction:column;align-items:center;
+  }
+  .beat .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);flex:none;margin-top:5px;}
+  .beat .line{flex:1;width:1px;background:var(--line);margin-top:4px;}
+  .beat:last-child .line{display:none;}
+  .beat h4{font-size:.98rem;font-family:"Fraunces",serif;margin:0 0 4px;}
+  .beat h4 .fn{font-family:"IBM Plex Mono",monospace;font-weight:500;font-size:11px;color:var(--teal);
+    background:var(--teal-soft);padding:2px 7px;border-radius:5px;margin-left:8px;vertical-align:middle;}
+  .beat p{margin:0;font-size:.9rem;color:var(--ink-soft);max-width:60ch;}
+
+  /* ---------- before/after ---------- */
+  .ba-wrap{overflow-x:auto;margin-top:22px;}
+  table.ba{width:100%;border-collapse:separate;border-spacing:0 8px;min-width:560px;}
+  table.ba th{
+    text-align:left;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--ink-soft);padding:0 14px 4px;
+  }
+  table.ba td{
+    padding:12px 14px;font-size:.9rem;vertical-align:top;
+  }
+  table.ba td.before{background:var(--rust-soft);border-radius:8px 0 0 8px;color:var(--ink);}
+  table.ba td.after{background:var(--teal-soft);border-radius:0 8px 8px 0;color:var(--ink);}
+
+  /* ---------- inspection callout ---------- */
+  .inspect{
+    margin-top:26px;background:var(--code-bg);color:var(--code-ink);
+    border-radius:12px;padding:22px 24px;box-shadow:var(--shadow);
+  }
+  .inspect .ihead{
+    font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+    color:#8f9aa8;margin-bottom:14px;display:flex;gap:8px;align-items:center;
+  }
+  .inspect .ihead::before{content:"●";color:#5fbf8f;font-size:9px;}
+  .ifield{
+    display:grid;grid-template-columns:150px 1fr;gap:12px;
+    padding:8px 0;border-bottom:1px solid rgba(255,255,255,.08);
+    font-family:"IBM Plex Mono",monospace;font-size:12.5px;
+  }
+  .ifield:last-child{border-bottom:none;}
+  .ifield .k{color:#8f9aa8;}
+  .ifield .v{color:var(--code-ink);}
+  .ifield .v em{color:#f0b878;font-style:normal;}
+
+  /* ---------- comparison table ---------- */
+  .cmp-wrap{overflow-x:auto;margin-top:22px;}
+  table.cmp{width:100%;border-collapse:collapse;min-width:640px;font-size:.88rem;}
+  table.cmp th{
+    text-align:left;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.05em;
+    text-transform:uppercase;color:var(--ink-soft);padding:8px 12px;border-bottom:1px solid var(--line);
+  }
+  table.cmp td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top;}
+  table.cmp tr td:first-child{color:var(--ink-soft);font-size:.82rem;white-space:nowrap;}
+  table.cmp tbody tr:hover{background:var(--paper-raised);}
+
+  /* ---------- swot ---------- */
+  .swot{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px;}
+  .swot .cell{border-radius:10px;padding:16px 18px;border:1px solid var(--line);}
+  .swot .cell h4{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;margin:0 0 10px;}
+  .swot .cell ul{margin:0;padding-left:18px;font-size:.87rem;color:var(--ink-soft);}
+  .swot .cell li{margin-bottom:5px;}
+  .swot .s{background:var(--teal-soft);} .swot .s h4{color:var(--teal);}
+  .swot .w{background:var(--rust-soft);} .swot .w h4{color:var(--rust);}
+  .swot .o{background:var(--accent-soft);} .swot .o h4{color:var(--accent-ink);}
+  .swot .t{background:var(--paper-raised);border-color:var(--line);} .swot .t h4{color:var(--ink-soft);}
+  @media (max-width:640px){.swot{grid-template-columns:1fr;}}
+
+  .moves{margin-top:16px;display:flex;flex-direction:column;gap:8px;}
+  .move{
+    display:grid;grid-template-columns:88px 1fr;gap:12px;
+    background:var(--paper-raised);border:1px solid var(--line);border-radius:8px;padding:11px 14px;
+  }
+  .move .tag{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--accent-ink);font-weight:600;align-self:start;padding-top:2px;}
+  .move p{margin:0;font-size:.87rem;}
+
+  /* ---------- cahier des charges ---------- */
+  .subhead{font-family:"Fraunces",serif;font-size:1.15rem;margin:34px 0 4px;}
+  .subhead:first-of-type{margin-top:26px;}
+  .sub-lede{color:var(--ink-soft);font-size:.92rem;margin:0 0 4px;max-width:60ch;}
+
+  ol.blocks{margin:18px 0 0;padding:0;counter-reset:blk;}
+  ol.blocks li{
+    list-style:none;counter-increment:blk;
+    display:grid;grid-template-columns:26px 1fr;gap:12px;
+    padding:9px 0;border-bottom:1px dashed var(--line);font-size:.9rem;
+  }
+  ol.blocks li::before{
+    content:counter(blk);font-family:"IBM Plex Mono",monospace;color:var(--accent-ink);font-size:12.5px;
+  }
+  ol.blocks li b{display:block;}
+  ol.blocks li span{color:var(--ink-soft);font-size:.85rem;}
+
+  table.tiers{width:100%;border-collapse:collapse;margin-top:16px;font-size:.87rem;}
+  table.tiers th{text-align:left;font-family:"IBM Plex Mono",monospace;font-size:10.5px;text-transform:uppercase;
+    letter-spacing:.05em;color:var(--ink-soft);padding:8px 10px;border-bottom:1px solid var(--line);}
+  table.tiers td{padding:10px 10px;border-bottom:1px solid var(--line);vertical-align:top;}
+  table.tiers td.tier-name{font-family:"Fraunces",serif;font-weight:600;color:var(--accent-ink);white-space:nowrap;}
+  .tw{overflow-x:auto;}
+
+  table.stack{width:100%;border-collapse:collapse;margin-top:14px;font-size:.86rem;}
+  table.stack th{text-align:left;font-family:"IBM Plex Mono",monospace;font-size:10.5px;text-transform:uppercase;
+    letter-spacing:.05em;color:var(--ink-soft);padding:7px 10px;border-bottom:1px solid var(--line);}
+  table.stack td{padding:9px 10px;border-bottom:1px solid var(--line);}
+  .pill{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.03em;
+    padding:2px 8px;border-radius:100px;white-space:nowrap;}
+  .pill.mvp{background:var(--teal-soft);color:var(--teal);}
+  .pill.v2{background:var(--paper-raised);color:var(--ink-soft);border:1px solid var(--line);}
+
+  .warn{
+    margin-top:20px;border-left:3px solid var(--rust);background:var(--rust-soft);
+    border-radius:0 8px 8px 0;padding:14px 18px;
+  }
+  .warn h4{margin:0 0 8px;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--rust);}
+  .warn ul{margin:0;padding-left:18px;font-size:.87rem;}
+  .warn li{margin-bottom:5px;}
+
+  details.faq{border-bottom:1px solid var(--line);padding:12px 0;}
+  details.faq summary{cursor:pointer;font-size:.93rem;font-weight:600;list-style:none;display:flex;
+    justify-content:space-between;gap:12px;}
+  details.faq summary::-webkit-details-marker{display:none;}
+  details.faq summary::after{content:"+";font-family:"IBM Plex Mono",monospace;color:var(--accent-ink);flex:none;}
+  details.faq[open] summary::after{content:"–";}
+  details.faq p{margin:8px 0 0;font-size:.87rem;color:var(--ink-soft);}
+
+  footer{
+    max-width:920px;margin:0 auto;padding-block:40px 60px;
+    font-size:.85rem;color:var(--ink-soft);
+  }
+  footer a{color:var(--ink-soft);}
+  footer .decisions{margin-top:18px;}
+  footer .decisions li{margin-bottom:6px;}
+
+  @media (max-width:600px){
+    .grid6{grid-template-columns:1fr 1fr;}
+    .routes{grid-template-columns:1fr;}
+  }
+</style>
+
+<header class="masthead">
+  <div class="eyebrow"><span class="dot"></span>Dossier de veille concurrentielle — préparé pour PROD'AI</div>
+  <h1 class="title">Anatomie de brAIn</h1>
+  <p class="subtitle">Décryptage complet du modèle économique, de l'offre, du script de vente et du site de <b>brain-ecosysteme.com</b> — pour en tirer un cahier des charges concret pour le futur site de PROD'AI.</p>
+  <div class="meta-row">
+    <span><b>Cible analysée</b> brain-ecosysteme.com</span>
+    <span><b>Méthode</b> pipeline business (4 spécialistes + inspection du code)</span>
+    <span><b>Date</b> 14 septembre 2026</span>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="toc-inner">
+    <a href="#resume">00 — Résumé</a>
+    <a href="#modele">01 — Modèle</a>
+    <a href="#offre">02 — Offre</a>
+    <a href="#programme">03 — Programme</a>
+    <a href="#script">04 — Script de vente</a>
+    <a href="#technique">05 — Sous le capot</a>
+    <a href="#comparatif">06 — brAIn vs PROD'AI</a>
+    <a href="#swot">07 — Forces &amp; risques</a>
+    <a href="#cahier">08 — Cahier des charges</a>
+    <a href="#sources">09 — Sources</a>
+  </div>
+</nav>
+
+<section id="resume">
+  <div class="kicker"><span class="num">00</span>Résumé exécutif</div>
+  <h2 class="h">Pas une formation. Un écosystème à quatre couches.</h2>
+  <p class="lede">brAIn vend une promesse simple — « vivre de l'IA en 60 jours » — mais le produit réel empile quatre choses qui se renforcent : une formation, un coaching, un réseau à effet boule-de-neige, et surtout un flux de leads partagés entre membres. C'est ce dernier point, pas le contenu vidéo, qui retient les gens. Le site public, lui, est volontairement simple : une seule page, aucun prix affiché, un unique bouton « Réserver un appel ». Toute la vraie mécanique — et tout le vrai investissement — est cachée dans l'espace membre.</p>
+  <p class="lede">Pour PROD'AI, l'angle gagnant n'est pas de copier l'écosystème généraliste de brAIn, mais de reproduire sa mécanique (réseau + leads + marque + bibliothèque de templates) à l'échelle d'une seule niche — l'immobilier — où brAIn n'a aucune expertise terrain.</p>
+  <div class="stats">
+    <div class="stat"><span class="n mono">450+</span><span class="l">membres actifs</span></div>
+    <div class="stat"><span class="n mono">150+</span><span class="l">clients de l'agence mère</span></div>
+    <div class="stat"><span class="n mono">1M€+</span><span class="l">CA agence 2025</span></div>
+    <div class="stat"><span class="n mono">2-5k€</span><span class="l">ticket estimé (non affiché)</span></div>
+  </div>
+</section>
+
+<section id="modele">
+  <div class="kicker"><span class="num">01</span>Le modèle économique</div>
+  <h2 class="h">Quatre couches empilées, chacune retient là où la précédente s'arrête</h2>
+  <p class="lede">Une formation vidéo seule perd de la valeur dès qu'elle est consommée — le client n'a plus de raison de rester. brAIn a construit un système qui inverse cette logique : plus on reste, plus le réseau et les leads deviennent précieux.</p>
+  <div class="layers">
+    <div class="layer">
+      <div class="ln">01</div>
+      <div><h3>Formation — le Protocole</h3><p>70h+ de contenu vidéo issu de vraies missions, de l'audit à la signature client. Sert de point d'entrée et justifie le prix — mais seule, elle ne retiendrait personne plus de quelques semaines.</p><span class="tag">Commodité</span></div>
+    </div>
+    <div class="layer">
+      <div class="ln">02</div>
+      <div><h3>Coaching &amp; événements</h3><p>Lives hebdomadaires, masterclass, convention annuelle. Donne une raison de revenir une fois le contenu terminé — rythme la rétention comme un abonnement à un club plutôt qu'un achat ponctuel.</p><span class="tag">Rétention</span></div>
+    </div>
+    <div class="layer">
+      <div class="ln">03</div>
+      <div><h3>Réseau — effet boule-de-neige</h3><p>Carte des 450+ membres, espaces par verticale métier. Chaque nouveau membre rend le réseau plus attractif pour le suivant — un effet réseau classique, indépendant de la qualité du contenu.</p><span class="tag">Effet réseau</span></div>
+    </div>
+    <div class="layer">
+      <div class="ln">04</div>
+      <div><h3>Agence-en-boîte — Sharing + Library + Brand</h3><p>Leads partagés, 300+ templates prêts à l'emploi, marque « brAIn » utilisable dès le jour 1 pour crédibiliser une proposition sans avoir encore livré de mission. <b>C'est le vrai moat</b> : partir, c'est perdre un canal de clients, pas juste arrêter de regarder des vidéos.</p><span class="tag">Moat réel</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="offre">
+  <div class="kicker"><span class="num">02</span>L'offre</div>
+  <h2 class="h">Six piliers nommés, trois débouchés au choix</h2>
+  <p class="lede">Habiller une offre floue (« une formation IA ») en système à piliers nommés donne une impression de méthode propriétaire — c'est un vrai levier de différenciation, indépendamment du contenu.</p>
+  <div class="grid6">
+    <div class="pillar"><div class="pn">01</div><h3>Protocole</h3><p>70h+ vidéo, audit → closing, aucun prérequis technique, mis à jour en continu.</p></div>
+    <div class="pillar"><div class="pn">02</div><h3>Coaching</h3><p>Lives hebdomadaires avec des praticiens actifs, pas des « formateurs » théoriques.</p></div>
+    <div class="pillar"><div class="pn">03</div><h3>Réseau</h3><p>Communauté internationale, carte interactive, espaces par verticale métier.</p></div>
+    <div class="pillar"><div class="pn">04</div><h3>Sharing</h3><p>Flux de leads partagé entre l'écosystème et les membres, co-deals possibles.</p></div>
+    <div class="pillar"><div class="pn">05</div><h3>Brand</h3><p>La marque « brAIn » crédibilise une proposition commerciale dès le J1, sans mission livrée.</p></div>
+    <div class="pillar"><div class="pn">06</div><h3>Library</h3><p>300+ templates n8n / agents / prompts, classés par verticale, issus de vraies missions.</p></div>
+  </div>
+
+  <p class="lede" style="margin-top:30px">Une fois formé, le membre choisit une des trois sorties — c'est une bifurcation d'identité qui élargit l'audience sans diluer le message : chacun se reconnaît dans un des trois profils.</p>
+  <div class="routes">
+    <div class="route"><h4>I · Agence IA</h4><p>Déployer automatisations et agents pour des entreprises. Audit → proposition → livraison → récurrence.</p></div>
+    <div class="route"><h4>II · Chief AI Officer</h4><p>Rôle de conseil interne, quelques heures/semaine, haut taux journalier. Accompagnement → transformation → pilotage.</p></div>
+    <div class="route"><h4>III · Formateur IA</h4><p>Concevoir et animer des formations IA en entreprise — présentiel, distanciel, hybride.</p></div>
+  </div>
+</section>
+
+<section id="programme">
+  <div class="kicker"><span class="num">03</span>Le programme</div>
+  <h2 class="h">Dix modules, du positionnement au scaling</h2>
+  <p class="lede">La progression suit exactement le cycle de vie d'une agence naissante — un ordre qui vaut d'être copié pour structurer une formation PROD'AI, indépendamment du contenu.</p>
+  <ol class="prog">
+    <li><span class="pnum">01</span><span class="ptxt">Bases IA et positionnement stratégique</span></li>
+    <li><span class="pnum">02</span><span class="ptxt">Expertise opérationnelle — prompt engineering, automatisation</span></li>
+    <li><span class="pnum">03</span><span class="ptxt">Identifier les besoins entreprise et réaliser un audit IA</span></li>
+    <li><span class="pnum">04</span><span class="ptxt">Devenir Référent / Formateur IA</span></li>
+    <li><span class="pnum">05</span><span class="ptxt">Expert automatisation — n8n, workflows sectoriels</span></li>
+    <li><span class="pnum">06</span><span class="ptxt">Agents IA 2.0 — agents spécialisés, orchestration multi-agents</span></li>
+    <li><span class="pnum">07</span><span class="ptxt">Claude Code / Cowork comme cerveau opérationnel permanent</span></li>
+    <li><span class="pnum">08</span><span class="ptxt">Construire une offre high-ticket — packaging, prix, closing</span></li>
+    <li><span class="pnum">09</span><span class="ptxt">Génération de leads — Instagram, LinkedIn, Lemlist, Meta Ads</span></li>
+    <li><span class="pnum">10</span><span class="ptxt">Scaler son agence — closing B2B, branding, site web</span></li>
+  </ol>
+</section>
+
+<section id="script">
+  <div class="kicker"><span class="num">04</span>Le script de vente</div>
+  <h2 class="h">Une page, un seul bouton, répété cinq fois</h2>
+  <p class="lede">Aucun prix affiché, un CTA unique « Réserver un appel » qui revient à chaque section. La page ne cherche jamais à conclure seule — elle chauffe, qualifie, et transfère la pression à un appel de vente. Voici l'arc en huit temps.</p>
+  <div class="arc">
+    <div class="beat"><div class="rail"><div class="dot"></div><div class="line"></div></div><div><h4>Promesse + désamorçage<span class="fn">Hero</span></h4><p>« Vivre de l'IA en 60 jours » puis, immédiatement, « aucune compétence technique requise » — le frein est retiré avant que l'objection naisse.</p></div></div>
+    <div class="beat"><div class="rail"><div class="dot"></div><div class="line"></div></div><div><h4>Preuve ambiante<span class="fn">Compteurs</span></h4><p>Chiffres animés (membres, satisfaction, heures de contenu) affichés avant tout argument détaillé — la confiance s'installe en fond avant la lecture.</p></div></div>
+    <div class="beat"><div class="rail"><div class="dot"></div><div class="line"></div></div><div><h4>Attaque du statu quo, sans nommer personne<span class="fn">Positionnement</span></h4><p>« Pas d'influenceurs qui ont fait leur richesse sur la vente de formations » — vise toute une catégorie de concurrents sans jamais en citer un.</p></div></div>
+    <div class="beat"><div class="rail"><div class="dot"></div><div class="line"></div></div><div><h4>Autorité par association<span class="fn">Logos</span></h4><p>PSG, Decathlon, Dolce &amp; Gabbana : la crédibilité de marques connues déteint sur brAIn sans qu'aucune phrase n'ait à le formuler.</p></div></div>
+    <div class="beat"><div class="rail"><div class="dot"></div><div class="line"></div></div><div><h4>Storytelling fondateur avec vulnérabilité<span class="fn">Histoire</span></h4><p>Pionniers → épreuves → leadership. « En accueillant notre premier enfant » réinjecte de l'humain juste avant de vendre.</p></div></div>
+    <div class="beat"><div class="rail"><div class="dot"></div><div class="line"></div></div><div><h4>Contraste miroir, ligne par ligne<span class="fn">Avant/Après</span></h4><p>Sept lignes, chacune une micro-tension posée puis résolue immédiatement. Voir le gabarit ci-dessous.</p></div></div>
+    <div class="beat"><div class="rail"><div class="dot"></div><div class="line"></div></div><div><h4>Levée d'objections chirurgicale<span class="fn">FAQ</span></h4><p>Huit questions qui correspondent aux huit vraies peurs du prospect — pas de généralités, un objection-handling déguisé en FAQ.</p></div></div>
+    <div class="beat"><div class="rail"><div class="dot"></div></div><div><h4>Clôture à risque perçu nul<span class="fn">CTA final</span></h4><p>« On valide ensemble si brAIn est le bon levier pour vous » — l'appel devient un diagnostic mutuel, pas un entretien de vente.</p></div></div>
+  </div>
+
+  <h3 class="subhead">Le gabarit avant/après, transposé à PROD'AI</h3>
+  <p class="sub-lede">Chaque ligne « avant » ne fonctionne que si elle vient d'un vrai doute vécu — jamais d'une généralité abstraite.</p>
+  <div class="ba-wrap">
+    <table class="ba">
+      <tr><th>Avant</th><th>Avec PROD'AI</th></tr>
+      <tr><td class="before">Vous testez ChatGPT seule, sans savoir si vous faites juste</td><td class="after">Vous suivez un protocole testé sur de vrais dossiers immobiliers</td></tr>
+      <tr><td class="before">Chaque automatisation est un bricolage isolé qui casse au moindre imprévu</td><td class="after">Un système documenté, mis à jour à mesure que l'IA change</td></tr>
+      <tr><td class="before">Vous doutez de vendre « juste du contenu IA à la mode »</td><td class="after">Vous vendez une méthode éprouvée sur des cas clients réels</td></tr>
+      <tr><td class="before">Vous ne savez pas si votre agence utilise l'IA « comme il faut »</td><td class="after">Un diagnostic clair de ce qui vaut la peine d'automatiser — ou non</td></tr>
+    </table>
+  </div>
+</section>
+
+<section id="technique">
+  <div class="kicker"><span class="num">05</span>Sous le capot</div>
+  <h2 class="h">Ce que le code révèle vraiment</h2>
+  <p class="lede">Le site public a été inspecté directement (code source, en-têtes serveur, requêtes réseau). Verdict : la vitrine est volontairement bon marché à produire. Toute la complexité — et tout le coût réel — se trouve dans l'espace membre invisible.</p>
+  <div class="inspect">
+    <div class="ihead">rapport d'inspection — brain-ecosysteme.com</div>
+    <div class="ifield"><span class="k">hébergement</span><span class="v">Vercel</span></div>
+    <div class="ifield"><span class="k">framework / cms</span><span class="v"><em>aucun</em> — page codée à la main, ni WordPress, ni Webflow, ni Framer</span></div>
+    <div class="ifield"><span class="k">carte des membres</span><span class="v">Leaflet.js + tuiles CARTO, mais <em>liste de villes codée en dur</em> — pas de base de données connectée</span></div>
+    <div class="ifield"><span class="k">compteurs animés</span><span class="v">chiffres écrits en dur dans le HTML, mis à jour manuellement</span></div>
+    <div class="ifield"><span class="k">avis "Trustpilot"</span><span class="v"><em>captures d'écran statiques</em> — aucun widget connecté à l'API Trustpilot</span></div>
+    <div class="ifield"><span class="k">prise de rendez-vous</span><span class="v">iClosed.io — outil de qualification, pas un simple Calendly</span></div>
+    <div class="ifield"><span class="k">analytics</span><span class="v"><em>aucun détecté</em> — ni GA4, ni GTM, ni Meta Pixel</span></div>
+  </div>
+  <p class="lede" style="margin-top:22px">Conséquence directe pour le budget : la page publique n'exige ni développement lourd ni base de données. Le vrai investissement va dans la plateforme membre (LMS, communauté, leads) — largement réalisable en no-code pour une petite structure. Détail complet en annexe technique (lien en source, §09).</p>
+</section>
+
+<section id="comparatif">
+  <div class="kicker"><span class="num">06</span>Face à face</div>
+  <h2 class="h">brAIn vs PROD'AI</h2>
+  <p class="lede">brAIn joue large, PROD'AI peut jouer profond. Aucun acteur identifié ne combine formation + agence opérationnelle + spécialisation immobilière.</p>
+  <div class="cmp-wrap">
+    <table class="cmp">
+      <tr><th>Dimension</th><th>brAIn</th><th>PROD'AI</th></tr>
+      <tr><td>Positionnement</td><td>Écosystème généraliste, toutes verticales</td><td>Agence spécialisée — IA pour l'immobilier de prestige</td></tr>
+      <tr><td>Cible</td><td>Reconversion / freelances IA (78% sans background technique)</td><td>Professionnels de l'immobilier</td></tr>
+      <tr><td>Revenu</td><td>Programme high-ticket + communauté + lead sharing</td><td>Prestation sur-mesure + formation finançable (Qualiopi/OPCO)</td></tr>
+      <tr><td>Preuve sociale</td><td>450 membres, avis, clients agence (PSG, D&amp;G…)</td><td>10 ans terrain immobilier, portfolio en construction</td></tr>
+      <tr><td>Communauté</td><td>Réseau international actif, carte interactive</td><td>À construire — opportunité ouverte</td></tr>
+      <tr><td>Templates</td><td>300+ classés par verticale</td><td>Workflows internes n8n, non encore productisés</td></tr>
+      <tr><td>Financement</td><td>Non mentionné</td><td>Qualiopi via Collection Privée → financement OPCO possible</td></tr>
+      <tr><td>Fondateur</td><td>Polytech + ESSEC, agence 150+ clients tech</td><td>10 ans terrain immobilier haut de gamme, bilingue FR/RU</td></tr>
+    </table>
+  </div>
+</section>
+
+<section id="swot">
+  <div class="kicker"><span class="num">07</span>Lecture stratégique</div>
+  <h2 class="h">Ce qui joue pour PROD'AI — et ce qui menace</h2>
+  <div class="swot">
+    <div class="cell s"><h4>Forces</h4><ul>
+      <li>Niche ultra-ciblée là où brAIn est généraliste</li>
+      <li>Qualiopi → financement OPCO que brAIn n'a pas</li>
+      <li>10 ans de terrain immobilier + maîtrise IA, combinaison rare</li>
+      <li>Done-for-you : revenus par prestation, pas seulement formation</li>
+    </ul></div>
+    <div class="cell w"><h4>Faiblesses</h4><ul>
+      <li>Pas de communauté ni de lead sharing — rétention à construire</li>
+      <li>Preuve sociale encore limitée, peu de témoignages fermés</li>
+      <li>Solo — pas d'équipe coaching ni de co-fondateur technique</li>
+      <li>Workflows internes non encore packagés en produit</li>
+    </ul></div>
+    <div class="cell o"><h4>Opportunités</h4><ul>
+      <li>Aucun concurrent niché immobilier + IA identifié</li>
+      <li>Demande IA en immobilier en forte hausse (visites virtuelles, valorisation)</li>
+      <li>Marché luxe francophone/russophone sous-exploité</li>
+      <li>Une Library verticale a 10x plus de valeur par template qu'une généraliste</li>
+    </ul></div>
+    <div class="cell t"><h4>Menaces</h4><ul>
+      <li>brAIn (ou un clone) pourrait se verticaliser sur l'immobilier</li>
+      <li>Vitesse du marché IA — coûteux à maintenir en solo</li>
+      <li>Perception « une personne » face à un écosystème de 450+</li>
+      <li>Dépendance au closing personnel sans système d'acquisition</li>
+    </ul></div>
+  </div>
+  <div class="moves">
+    <div class="move"><span class="tag">Attaquer</span><p>Lancer une offre Qualiopi spécial immobilier — seule formation IA financée OPCO qui parle le langage des agents immobiliers.</p></div>
+    <div class="move"><span class="tag">Combler</span><p>Construire une micro-communauté de 20-30 pros immobiliers plutôt que viser le volume — qualité avant échelle.</p></div>
+    <div class="move"><span class="tag">Neutraliser</span><p>Documenter publiquement le terrain (LinkedIn/Instagram) — la preuve d'exécution réelle bat tout argument généraliste.</p></div>
+    <div class="move"><span class="tag">Urgence</span><p>Fermer un premier cas client et le documenter — un seul cas signé change la perception plus que dix slides.</p></div>
+  </div>
+</section>
+
+<section id="cahier">
+  <div class="kicker"><span class="num">08</span>Cahier des charges</div>
+  <h2 class="h">Ce qu'on donne à l'agence qui construit le site</h2>
+  <p class="lede">Structure de page, offre à afficher, brique technique par brique technique — prêt à transmettre à un développeur ou une agence web.</p>
+
+  <h3 class="subhead">A · Structure de la page (one-pager, calquée sur le script de brAIn)</h3>
+  <ol class="blocks">
+    <li><b>Hero</b><span>Promesse concrète + désamorçage du frein n°1, un seul CTA</span></li>
+    <li><b>Bandeau preuve</b><span>Chiffres réels de Collection Privée / PROD'AI, même modestes — jamais inventés</span></li>
+    <li><b>Piliers de l'offre</b><span>3 à 6 blocs nommés, pas « module 1, module 2 »</span></li>
+    <li><b>Positionnement</b><span>Ce qui différencie PROD'AI, sans dénigrer nommément un concurrent</span></li>
+    <li><b>Histoire fondatrice</b><span>10 ans de terrain immobilier + un détail humain vrai — pas une anecdote gratuite</span></li>
+    <li><b>Tableau avant/après</b><span>5 à 8 lignes tirées de vrais doutes clients, jamais génériques</span></li>
+    <li><b>Preuve sociale</b><span>Témoignages réels, cas Cherpantier documenté dès qu'il est fermé</span></li>
+    <li><b>FAQ objections</b><span>Les vraies questions entendues en appel/DM, pas des questions inventées</span></li>
+    <li><b>CTA final</b><span>Identique au CTA du hero, formulé comme un diagnostic mutuel</span></li>
+  </ol>
+
+  <h3 class="subhead">B · Trois paliers d'offre — hypothèse à valider</h3>
+  <p class="sub-lede">Convergence entre deux analyses indépendantes sur cette structure. Les montants sont des hypothèses de départ, à ajuster une fois validées par Katerina — jamais à publier tels quels sans validation.</p>
+  <div class="tw">
+    <table class="tiers">
+      <tr><th>Palier</th><th>Pour qui</th><th>Contenu</th></tr>
+      <tr><td class="tier-name">Autonomie</td><td>Veut apprendre à automatiser seule, budget contraint</td><td>Formation + templates n8n immobilier, sans accompagnement individuel</td></tr>
+      <tr><td class="tier-name">Accélération</td><td>Veut un coaching + un réseau de pairs immobiliers</td><td>Formation + coaching + accès à un cercle restreint de membres immobiliers</td></tr>
+      <tr><td class="tier-name">Délégation</td><td>Veut que PROD'AI livre directement</td><td>Prestation done-for-you — audit, déploiement, suivi</td></tr>
+    </table>
+  </div>
+
+  <h3 class="subhead">C · Stack technique recommandée, brique par brique</h3>
+  <div class="tw">
+    <table class="stack">
+      <tr><th>Brique</th><th>Outil recommandé</th><th>Priorité</th></tr>
+      <tr><td>Page publique + prise de RDV</td><td>Page one-page simple + Calendly ou Cal.com</td><td><span class="pill mvp">MVP</span></td></tr>
+      <tr><td>Formation (LMS)</td><td>Skool ou Circle.so plutôt qu'un développement sur-mesure</td><td><span class="pill mvp">MVP</span></td></tr>
+      <tr><td>Bibliothèque de templates</td><td>Notion ou Airtable, classée par cas d'usage immobilier</td><td><span class="pill mvp">MVP</span></td></tr>
+      <tr><td>Automatisation des leads</td><td>n8n — déjà maîtrisé par Katerina</td><td><span class="pill mvp">MVP</span></td></tr>
+      <tr><td>Communauté / réseau de membres</td><td>Espace dédié dans Skool/Circle, pas de développement custom</td><td><span class="pill v2">V2</span></td></tr>
+      <tr><td>Carte interactive des membres</td><td>Google Sheet + Leaflet — seulement au-delà de 30-50 membres</td><td><span class="pill v2">V2</span></td></tr>
+    </table>
+  </div>
+
+  <div class="warn">
+    <h4>À ne pas copier tel quel</h4>
+    <ul>
+      <li><b>Zéro prix affiché</b> — fonctionne pour une marque déjà connue ; risqué pour une notoriété en construction. Prévoir au moins une fourchette.</li>
+      <li><b>« Vivre de l'IA en 60 jours »</b> — promesse de résultat difficile à prouver ; préférer une formulation nuancée sur les premiers résultats visibles.</li>
+      <li><b>Réseau généraliste dilué</b> — contre-productif pour PROD'AI, dont l'avantage est justement la spécialisation immobilière.</li>
+      <li><b>Afficher une carte/communauté avant la masse critique</b> — ne pas montrer un compteur ou une carte avant d'avoir au moins 30 membres actifs, sous peine d'effet inverse.</li>
+    </ul>
+  </div>
+</section>
+
+<footer id="sources">
+  <div class="kicker" style="margin-bottom:14px"><span class="num mono">09</span>Sources &amp; décisions à valider</div>
+  <p>Analyse construite à partir de l'inspection directe de <a href="https://www.brain-ecosysteme.com/" target="_blank" rel="noopener">brain-ecosysteme.com</a> (contenu, code source, en-têtes serveur) et de la recherche concurrentielle déjà réalisée par Katerina le 13/09/2026 (<span class="mono">FICHE-BRAIN-ECOSYSTEME.md</span> et <span class="mono">ANALYSE-BRAIN-VS-PRODAI.md</span>, dossier Prod'AI/06-RECHERCHE-ET-BENCHMARKS).</p>
+  <p>Annexes détaillées produites en parallèle par les agents spécialisés : décryptage complet de l'offre et du pricing, et cahier des charges technique approfondi — disponibles sur demande dans la session.</p>
+  <ul class="decisions">
+    <li>Valider les intitulés et les montants réels des trois paliers (Autonomie / Accélération / Délégation).</li>
+    <li>Décider si PROD'AI affiche une fourchette de prix ou reste 100% funnel « appel ».</li>
+    <li>Fixer le seuil de membres à partir duquel montrer une communauté ou une carte (recommandé : 30+).</li>
+    <li>Choisir la formulation de promesse (éviter tout engagement de résultat financier chiffré).</li>
+  </ul>
+</footer>
