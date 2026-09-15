@@ -1,0 +1,734 @@
+<title>Outbound Promoteurs</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root {
+    --copper: #D4A574;
+    --copper-dark: #B8856A;
+    --copper-glow: #E67E50;
+    --ground: #F9F3ED;
+    --surface: #FFFFFF;
+    --surface-alt: #F0E8E0;
+    --border: #E0D5CA;
+    --text: #1A1714;
+    --text-secondary: #6B5E52;
+    --text-muted: #9B8E82;
+    --script-bg: #FDF8F4;
+    --script-border: #D4A574;
+    --tag-bg: #EDE3D9;
+    --tag-text: #7A6A5C;
+    --kpi-good: #4A7C59;
+    --kpi-warn: #C4873B;
+    --phase-line: #D4A574;
+    --code-bg: #F5EDE5;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #1A1714;
+      --surface: #242019;
+      --surface-alt: #2E2924;
+      --border: #3D362F;
+      --text: #F0E8E0;
+      --text-secondary: #B5A898;
+      --text-muted: #7A6E64;
+      --script-bg: #2A2520;
+      --script-border: #B8856A;
+      --tag-bg: #3A3228;
+      --tag-text: #C4B5A5;
+      --kpi-good: #6FA67E;
+      --kpi-warn: #D9A05B;
+      --code-bg: #2E2924;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #1A1714;
+    --surface: #242019;
+    --surface-alt: #2E2924;
+    --border: #3D362F;
+    --text: #F0E8E0;
+    --text-secondary: #B5A898;
+    --text-muted: #7A6E64;
+    --script-bg: #2A2520;
+    --script-border: #B8856A;
+    --tag-bg: #3A3228;
+    --tag-text: #C4B5A5;
+    --kpi-good: #6FA67E;
+    --kpi-warn: #D9A05B;
+    --code-bg: #2E2924;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: var(--text);
+    background: var(--ground);
+    padding-inline: 20px;
+    padding-block: 0;
+    max-width: 720px;
+    margin: 0 auto;
+    line-height: 1.65;
+    font-size: 15px;
+  }
+
+  h1, h2, h3 {
+    font-family: 'DM Serif Text', Georgia, serif;
+    text-wrap: balance;
+    line-height: 1.2;
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin: 2.5rem 0 0.5rem;
+    color: var(--text);
+  }
+
+  h2 {
+    font-size: 1.35rem;
+    margin: 2.5rem 0 1rem;
+    color: var(--text);
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--copper);
+  }
+
+  h3 {
+    font-size: 1.1rem;
+    margin: 1.5rem 0 0.75rem;
+    color: var(--copper-dark);
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    line-height: 1.5;
+  }
+
+  .header-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    background: var(--tag-bg);
+    color: var(--tag-text);
+    padding: 4px 10px;
+    border-radius: 4px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .section-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-panel h3:first-child {
+    margin-top: 0;
+  }
+
+  /* Script / message cards */
+  .script-card {
+    background: var(--script-bg);
+    border-left: 3px solid var(--script-border);
+    padding: 1.25rem 1.25rem 1.25rem 1.5rem;
+    margin: 1rem 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.92rem;
+  }
+
+  .script-card .script-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--copper-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.6rem;
+  }
+
+  .script-card p {
+    margin: 0.4rem 0;
+  }
+
+  .script-card .variable {
+    background: var(--code-bg);
+    color: var(--copper-glow);
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85em;
+  }
+
+  /* Timeline / sequence */
+  .sequence {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .sequence::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: var(--phase-line);
+  }
+
+  .sequence-step {
+    position: relative;
+    padding-bottom: 1.5rem;
+  }
+
+  .sequence-step:last-child {
+    padding-bottom: 0;
+  }
+
+  .sequence-step::before {
+    content: '';
+    position: absolute;
+    left: -2rem;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--ground);
+    border: 2px solid var(--copper);
+    margin-left: 2px;
+  }
+
+  .step-day {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--copper-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.25rem;
+  }
+
+  .step-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .step-desc {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.55;
+  }
+
+  /* KPI grid */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin: 1rem 0;
+  }
+
+  .kpi-card {
+    background: var(--surface-alt);
+    padding: 1rem;
+    border-radius: 6px;
+    text-align: center;
+  }
+
+  .kpi-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: var(--copper-glow);
+    font-variant-numeric: tabular-nums;
+    line-height: 1.2;
+  }
+
+  .kpi-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-top: 0.35rem;
+  }
+
+  /* Target table */
+  .target-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    margin: 1rem 0;
+  }
+
+  .target-table th {
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+    padding: 0.5rem 0.75rem;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .target-table td {
+    padding: 0.6rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-secondary);
+    vertical-align: top;
+  }
+
+  .target-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .target-table .name {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .priority-high {
+    color: var(--copper-glow);
+    font-weight: 600;
+  }
+
+  .priority-mid {
+    color: var(--kpi-warn);
+    font-weight: 500;
+  }
+
+  /* Checklist */
+  .checklist {
+    list-style: none;
+    padding: 0;
+    margin: 0.75rem 0;
+  }
+
+  .checklist li {
+    padding: 0.4rem 0 0.4rem 1.6rem;
+    position: relative;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+
+  .checklist li::before {
+    content: '◻';
+    position: absolute;
+    left: 0;
+    color: var(--copper);
+    font-size: 1rem;
+  }
+
+  /* Inline emphasis */
+  strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  em {
+    font-style: italic;
+    color: var(--text-secondary);
+  }
+
+  .callout {
+    background: var(--surface-alt);
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    border-left: 3px solid var(--copper-dark);
+  }
+
+  .callout strong {
+    color: var(--text);
+  }
+
+  .duo-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 1rem 0;
+  }
+
+  @media (max-width: 500px) {
+    .duo-cols {
+      grid-template-columns: 1fr;
+    }
+    h1 { font-size: 1.6rem; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2rem 0;
+  }
+
+  a {
+    color: var(--copper-dark);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .footer-note {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 2.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+</style>
+
+<h1>Outbound LinkedIn<br><span style="color: var(--copper)">Promoteurs Immobiliers</span></h1>
+<p class="subtitle">Stratégie de prospection directe pour décrocher des démos du format vidéo IA PROD'AI auprès des promoteurs en Île-de-France et grandes métropoles.</p>
+
+<div class="header-meta">
+  <span class="tag">Canal : LinkedIn</span>
+  <span class="tag">Profil : Personnel</span>
+  <span class="tag">Offre : Démo vidéo IA</span>
+  <span class="tag">Sept. 2026</span>
+</div>
+
+<!-- ===================== SECTION 1 : CIBLE ===================== -->
+<h2>1. Cible : qui contacter</h2>
+
+<div class="section-panel">
+  <h3>Profil Client Idéal (ICP)</h3>
+  <p>Promoteurs immobiliers résidentiels qui commercialisent des programmes neufs et ont besoin de <strong>contenu de projection</strong> pour vendre sur plan. Leur douleur : les acheteurs ne se projettent pas avec des plans 2D et des perspectives statiques — le taux de transformation des visites en réservation baisse.</p>
+
+  <div class="duo-cols">
+    <div>
+      <h3>Critères de qualification</h3>
+      <ul class="checklist">
+        <li>Commercialise du neuf (résidentiel ou mixte)</li>
+        <li>Programme en phase de lancement ou pré-commercialisation</li>
+        <li>Présent sur LinkedIn (publie ou commente)</li>
+        <li>Équipe marketing de 1 à 10 pers. (décision rapide)</li>
+        <li>Zone : Île-de-France, Lyon, Bordeaux, Nice, Montpellier</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Interlocuteurs cibles</h3>
+      <ul class="checklist">
+        <li><strong>Directeur commercial / de la commercialisation</strong></li>
+        <li><strong>Responsable marketing / communication</strong></li>
+        <li>Directeur de programmes</li>
+        <li>Fondateur / DG (promoteurs < 50 pers.)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="section-panel">
+  <h3>Promoteurs prioritaires à cibler</h3>
+  <div style="overflow-x: auto;">
+    <table class="target-table">
+      <thead>
+        <tr>
+          <th>Promoteur</th>
+          <th>Taille</th>
+          <th>Priorité</th>
+          <th>Angle d'approche</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name">Nexity</td>
+          <td>5,2 Md€ CA</td>
+          <td class="priority-mid">Moyenne</td>
+          <td>Grands comptes = cycle long. Cibler les directeurs de programme locaux IDF.</td>
+        </tr>
+        <tr>
+          <td class="name">Altarea</td>
+          <td>3,6 Md€ CA</td>
+          <td class="priority-mid">Moyenne</td>
+          <td>Projets urbains mixtes. Approcher les équipes commercialisation résidentiel.</td>
+        </tr>
+        <tr>
+          <td class="name">Bouygues Immobilier</td>
+          <td>2,6 Md€ CA</td>
+          <td class="priority-mid">Moyenne</td>
+          <td>Sensible à l'innovation digitale. Cibler le marketing régional.</td>
+        </tr>
+        <tr>
+          <td class="name">Bassac (Kaufman & Broad)</td>
+          <td>1,8 Md€ CA</td>
+          <td class="priority-high">Haute</td>
+          <td>Personnalisation forte = besoin de contenu sur-mesure. Bon fit.</td>
+        </tr>
+        <tr>
+          <td class="name">Promoteurs régionaux IDF</td>
+          <td>PME 10-200 pers.</td>
+          <td class="priority-high">Haute</td>
+          <td><strong>Cible n°1.</strong> Décision rapide, budget flexible, besoin immédiat de différenciation.</td>
+        </tr>
+        <tr>
+          <td class="name">Promoteurs métropoles</td>
+          <td>PME locales</td>
+          <td class="priority-high">Haute</td>
+          <td>Lyon, Bordeaux, Nice, Montpellier. Même logique : cycle court, besoin terrain.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <strong>Règle de priorisation :</strong> Commence par les PME (< 200 personnes). Un DG ou directeur commercial de promoteur régional accepte une démo en 1 échange. Chez les grands groupes, il faut 3 à 5 contacts avant d'atteindre le décideur.
+  </div>
+</div>
+
+<!-- ===================== SECTION 2 : PROFIL ===================== -->
+<h2>2. Préparer ton profil personnel</h2>
+
+<div class="section-panel">
+  <p>Ton profil perso est ta page de vente. Avant d'envoyer le premier message, il doit répondre à la question du promoteur : <strong>« pourquoi cette personne me contacte, et est-elle crédible ? »</strong></p>
+
+  <h3>Optimisations à faire</h3>
+  <ul class="checklist">
+    <li><strong>Titre LinkedIn</strong> : remplacer le titre actuel par quelque chose comme <em>« Je crée des vidéos immobilières IA qui font réserver des visites — Fondatrice PROD'AI »</em></li>
+    <li><strong>Bannière</strong> : un visuel avant/après (6 photos → vidéo) avec le logo PROD'AI</li>
+    <li><strong>Section « À propos »</strong> : 3 paragraphes max — problème du marché, ta solution, preuve (le cas Cherpantier ou FREDēLION)</li>
+    <li><strong>Sélection de contenus</strong> : épingler la vidéo FREDēLION et le carrousel système IA</li>
+    <li><strong>Expérience</strong> : ajouter PROD'AI comme poste actuel, lié à la page company</li>
+    <li><strong>Lien site / portfolio</strong> : le lien vers le portfolio mentionné dans tes posts</li>
+  </ul>
+
+  <div class="callout">
+    <strong>Synergie profil + page :</strong> Quand un promoteur reçoit ton message, il clique sur ton profil → voit PROD'AI → clique sur la page → voit les vidéos démo et le carrousel. Le duo <em>profil qui prospecte + page qui rassure</em> est ce qui convertit.
+  </div>
+</div>
+
+<!-- ===================== SECTION 3 : SÉQUENCE ===================== -->
+<h2>3. Séquence de messages</h2>
+
+<p>Séquence en 4 touches sur 14 jours. Chaque message est court (< 300 caractères pour les notes de connexion, < 80 mots pour les messages). Le principe : <strong>valeur d'abord, pitch jamais</strong>.</p>
+
+<div class="sequence">
+  <!-- J0 -->
+  <div class="sequence-step">
+    <div class="step-day">Jour 0 — Préparation</div>
+    <div class="step-title">Engagement silencieux</div>
+    <div class="step-desc">Avant d'envoyer la demande, like et commente 2-3 posts du prospect. Un commentaire pertinent de 2 phrases, pas un emoji. Objectif : que ton nom apparaisse avant ta demande.</div>
+  </div>
+
+  <!-- J1 -->
+  <div class="sequence-step">
+    <div class="step-day">Jour 1 — Demande de connexion</div>
+    <div class="step-title">Note personnalisée courte</div>
+    <div class="step-desc">Pas de demande vide. Une note de 2 lignes qui montre que tu sais ce qu'ils font.</div>
+
+    <div class="script-card">
+      <div class="script-label">Script — Note de connexion</div>
+      <p>Bonjour <span class="variable">{Prénom}</span>,</p>
+      <p>Je viens de voir le lancement de <span class="variable">{nom du programme}</span> — le positionnement sur <span class="variable">{quartier/segment}</span> est très bien pensé. Je travaille sur le contenu vidéo IA pour la promotion immobilière, j'aimerais échanger.</p>
+    </div>
+
+    <div class="script-card">
+      <div class="script-label">Variante — Quand pas de programme identifié</div>
+      <p>Bonjour <span class="variable">{Prénom}</span>,</p>
+      <p>Je suis votre travail chez <span class="variable">{entreprise}</span> depuis un moment. Je m'intéresse à la manière dont les promoteurs utilisent la vidéo pour commercialiser le neuf — j'aimerais échanger.</p>
+    </div>
+  </div>
+
+  <!-- J3 -->
+  <div class="sequence-step">
+    <div class="step-day">Jour 3 — Message de valeur</div>
+    <div class="step-title">Partage de résultat, pas de pitch</div>
+    <div class="step-desc">Une fois connectés, envoyer un message court avec un résultat concret. Pas de lien, pas de CTA agressif.</div>
+
+    <div class="script-card">
+      <div class="script-label">Script — Premier message</div>
+      <p>Merci pour la connexion <span class="variable">{Prénom}</span>.</p>
+      <p>Je voulais partager un retour d'expérience : on a transformé 6 photos d'annonce en vidéo immersive pour un bien à Paris 16e — sans tournage, livré en deux jours. Le format plein écran a généré un taux de clic 3x supérieur aux photos classiques.</p>
+      <p>Si le sujet vous parle, je peux vous montrer le résultat en 10 minutes.</p>
+    </div>
+  </div>
+
+  <!-- J7 -->
+  <div class="sequence-step">
+    <div class="step-day">Jour 7 — Relance douce</div>
+    <div class="step-title">Question ouverte</div>
+    <div class="step-desc">Si pas de réponse. Pas de « juste pour relancer » — poser une question liée à leur contexte.</div>
+
+    <div class="script-card">
+      <div class="script-label">Script — Relance</div>
+      <p><span class="variable">{Prénom}</span>, une question rapide : sur vos programmes en commercialisation, les acheteurs arrivent-ils à se projeter avec les visuels actuels (plans, perspectives 3D) ou vous constatez un décalage ?</p>
+      <p>C'est le problème que nos vidéos IA résolvent — heureux d'en discuter si le sujet est d'actualité chez vous.</p>
+    </div>
+  </div>
+
+  <!-- J14 -->
+  <div class="sequence-step">
+    <div class="step-day">Jour 14 — Dernière relance</div>
+    <div class="step-title">Fermeture propre</div>
+    <div class="step-desc">Dernier message. Court, respectueux, laisse la porte ouverte. Pas de troisième relance après ça.</div>
+
+    <div class="script-card">
+      <div class="script-label">Script — Fermeture</div>
+      <p><span class="variable">{Prénom}</span>, je ne veux pas insister — je comprends que le timing n'est peut-être pas le bon.</p>
+      <p>Si un jour vous cherchez à tester un format vidéo différent pour vos programmes, je serai là. Bonne continuation !</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SECTION 4 : OFFRE DÉMO ===================== -->
+<h2>4. L'offre démo</h2>
+
+<div class="section-panel">
+  <h3>Format de la démo gratuite</h3>
+  <p>Quand un promoteur accepte l'échange, voici ce que tu proposes :</p>
+
+  <div class="duo-cols">
+    <div class="callout" style="margin:0">
+      <strong>Ce que tu offres</strong><br>
+      Transformation de 2 à 4 photos d'un de leurs programmes en une vidéo immersive de 15-30 secondes. Gratuit. Livré sous 48h. Ils n'ont qu'à envoyer les photos.
+    </div>
+    <div class="callout" style="margin:0">
+      <strong>Pourquoi ça marche</strong><br>
+      Le promoteur voit le résultat sur <em>son propre bien</em>, pas un exemple générique. Le coût pour toi : 30 min de travail. La valeur perçue est énorme. C'est le closing le plus puissant.
+    </div>
+  </div>
+
+  <h3>Déroulé de l'appel démo (10 min)</h3>
+  <ul class="checklist">
+    <li>2 min — écouter leur contexte (quel programme, quel stade de commercialisation)</li>
+    <li>3 min — montrer la vidéo FREDēLION ou Cherpantier comme exemple</li>
+    <li>2 min — expliquer le process (photos → vidéo IA → livraison 48h)</li>
+    <li>3 min — proposer le test gratuit sur leur programme et convenir de la suite</li>
+  </ul>
+</div>
+
+<!-- ===================== SECTION 5 : ROUTINE ===================== -->
+<h2>5. Routine quotidienne</h2>
+
+<div class="section-panel">
+  <h3>30 minutes par jour, 5 jours par semaine</h3>
+
+  <div class="duo-cols">
+    <div>
+      <h3>Le matin (15 min)</h3>
+      <ul class="checklist">
+        <li>Répondre aux messages reçus la veille</li>
+        <li>Envoyer 5 demandes de connexion ciblées</li>
+        <li>Liker/commenter 3 posts de prospects</li>
+      </ul>
+    </div>
+    <div>
+      <h3>L'après-midi (15 min)</h3>
+      <ul class="checklist">
+        <li>Envoyer les messages J3 aux connexions acceptées</li>
+        <li>Envoyer les relances J7 et J14</li>
+        <li>Rechercher 5 nouveaux prospects pour le lendemain</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>Volume hebdo :</strong> 25 demandes de connexion → ~15 acceptées (60%) → ~4 conversations → ~1 démo. En 4 semaines : <strong>4 démos minimum</strong>. Sur 4 démos avec un format aussi concret, 1 à 2 conversions en client payant est réaliste.
+  </div>
+</div>
+
+<!-- ===================== SECTION 6 : KPIs ===================== -->
+<h2>6. KPIs à suivre</h2>
+
+<div class="kpi-grid">
+  <div class="kpi-card">
+    <div class="kpi-value">25</div>
+    <div class="kpi-label">Demandes / semaine</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-value">60%</div>
+    <div class="kpi-label">Taux d'acceptation</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-value">25%</div>
+    <div class="kpi-label">Taux de réponse</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-value">1/sem</div>
+    <div class="kpi-label">Démos bookées</div>
+  </div>
+</div>
+
+<div class="section-panel">
+  <h3>Tableau de suivi simple</h3>
+  <p>Un Google Sheet ou Notion avec ces colonnes suffit pour commencer :</p>
+  <div style="overflow-x: auto;">
+    <table class="target-table">
+      <thead>
+        <tr>
+          <th>Colonne</th>
+          <th>Exemple</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="name">Nom / Entreprise</td><td>Jean Dupont — Emerige</td></tr>
+        <tr><td class="name">Poste</td><td>Directeur commercial</td></tr>
+        <tr><td class="name">Date demande</td><td>15/09/2026</td></tr>
+        <tr><td class="name">Statut</td><td>Connecté / Message envoyé / Relancé / Démo / Converti</td></tr>
+        <tr><td class="name">Programme identifié</td><td>Résidence Parc de Sceaux</td></tr>
+        <tr><td class="name">Notes</td><td>Intéressé par le format, envoie photos lundi</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ===================== SECTION 7 : RECHERCHE ===================== -->
+<h2>7. Comment trouver les prospects</h2>
+
+<div class="section-panel">
+  <h3>Recherche LinkedIn — les bons filtres</h3>
+  <p>Dans la barre de recherche LinkedIn, utiliser ces requêtes :</p>
+
+  <div class="script-card">
+    <div class="script-label">Recherche par poste</div>
+    <p><span class="variable">"directeur commercial" promoteur immobilier</span></p>
+    <p><span class="variable">"responsable marketing" promotion immobilière</span></p>
+    <p><span class="variable">"directeur de programmes" immobilier neuf</span></p>
+  </div>
+
+  <div class="script-card">
+    <div class="script-label">Recherche par entreprise</div>
+    <p>Aller sur la page LinkedIn de chaque promoteur cible → onglet « Personnes » → filtrer par poste marketing ou commercial.</p>
+  </div>
+
+  <h3>Sources complémentaires</h3>
+  <ul class="checklist">
+    <li><strong>FPI (Fédération des Promoteurs Immobiliers)</strong> — annuaire des adhérents</li>
+    <li><strong>Immoweek, Le Moniteur</strong> — actualité des lancements de programmes</li>
+    <li><strong>Google Maps</strong> — « promoteur immobilier + [ville] » pour trouver les PME locales</li>
+    <li><strong>Pages LinkedIn des programmes</strong> — les gens qui commentent sont souvent dans le métier</li>
+  </ul>
+</div>
+
+<hr class="divider">
+
+<h2>8. Page PROD'AI — rôle et contenu</h2>
+
+<div class="section-panel">
+  <p>La page company ne prospecte pas. Elle sert à <strong>rassurer le prospect après ton message</strong>. Voici ce qu'elle doit montrer :</p>
+
+  <ul class="checklist">
+    <li><strong>Vidéos démo</strong> — tes meilleurs résultats (FREDēLION, Cherpantier, le duplex)</li>
+    <li><strong>Posts éducatifs</strong> — comme le carrousel « du chat aux agents IA » déjà publié</li>
+    <li><strong>Retours d'expérience</strong> — les posts « journal de labo » avec résultats concrets</li>
+    <li><strong>Fréquence</strong> — 2 à 3 posts par semaine pour que la page ait l'air active</li>
+  </ul>
+
+  <div class="callout">
+    <strong>Le circuit du prospect :</strong> il reçoit ton message → clique sur ton profil → voit « Fondatrice PROD'AI » → clique sur la page → voit les vidéos → se dit « elle sait faire » → répond. Si la page est vide ou inactive, le circuit se casse.
+  </div>
+</div>
+
+<p class="footer-note">Stratégie outbound PROD'AI — Septembre 2026. Cible initiale : promoteurs immobiliers résidentiels IDF + métropoles. Canal : LinkedIn profil personnel. Objectif : 4 démos/mois minimum.</p>
