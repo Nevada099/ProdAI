@@ -1,0 +1,716 @@
+<title>Prod'AI — Démo Formats</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+:root {
+  --bg: #F6F4EF;
+  --surface: #FFFFFF;
+  --surface-alt: #EDE9E0;
+  --text: #1A1A1C;
+  --text-muted: #6B6660;
+  --accent: #C9364A;
+  --accent-soft: #C9364A18;
+  --gold: #B8922D;
+  --gold-soft: #B8922D15;
+  --border: #D8D3CA;
+  --tag-bg: #1A1A1C;
+  --tag-text: #F6F4EF;
+  --mockup-bg: #2A2A2E;
+  --mockup-inner: #3A3A40;
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'Inter', system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111113;
+    --surface: #1C1C1F;
+    --surface-alt: #26262A;
+    --text: #E8E5DF;
+    --text-muted: #908A82;
+    --accent: #E8637A;
+    --accent-soft: #E8637A20;
+    --gold: #D4A853;
+    --gold-soft: #D4A85320;
+    --border: #333338;
+    --tag-bg: #E8E5DF;
+    --tag-text: #111113;
+    --mockup-bg: #0A0A0C;
+    --mockup-inner: #1A1A1E;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111113;
+  --surface: #1C1C1F;
+  --surface-alt: #26262A;
+  --text: #E8E5DF;
+  --text-muted: #908A82;
+  --accent: #E8637A;
+  --accent-soft: #E8637A20;
+  --gold: #D4A853;
+  --gold-soft: #D4A85320;
+  --border: #333338;
+  --tag-bg: #E8E5DF;
+  --tag-text: #111113;
+  --mockup-bg: #0A0A0C;
+  --mockup-inner: #1A1A1E;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  line-height: 1.6;
+  padding-inline: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+h1, h2, h3 { font-family: var(--serif); font-weight: 400; line-height: 1.2; }
+h1 { font-size: clamp(1.8rem, 5vw, 2.6rem); margin-block: 0 0.3em; }
+h2 { font-size: clamp(1.3rem, 3vw, 1.7rem); margin-block: 2.5em 0.8em; color: var(--accent); }
+h3 { font-size: 1.15rem; margin-block: 1.5em 0.5em; }
+
+.eyebrow {
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-block: 0 0.6em;
+}
+
+.subtitle { color: var(--text-muted); font-size: 0.95rem; max-width: 50ch; margin-block: 0 2em; }
+
+/* Case badge */
+.case-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 16px;
+  margin-block: 1.5em;
+  font-size: 0.82rem;
+}
+.case-badge strong { color: var(--text); }
+.case-badge span { color: var(--text-muted); }
+.case-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+
+/* Tags */
+.tag {
+  display: inline-block;
+  background: var(--tag-bg);
+  color: var(--tag-text);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+.tag--accent { background: var(--accent); color: #fff; }
+.tag--gold { background: var(--gold); color: #fff; }
+
+/* Scenario flow */
+.flow {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-block: 1.5em;
+}
+.flow-step {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 0 16px;
+  position: relative;
+}
+.flow-step:not(:last-child) .flow-line {
+  position: absolute;
+  left: 27px;
+  top: 40px;
+  bottom: -4px;
+  width: 2px;
+  background: var(--border);
+}
+.flow-num {
+  width: 56px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.75rem;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+.flow-body {
+  padding-block: 4px 24px;
+}
+.flow-body h4 {
+  margin: 0 0 4px;
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.flow-body p {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  max-width: 55ch;
+}
+.flow-time {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--gold);
+  margin-bottom: 2px;
+}
+
+/* Format grid */
+.formats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+  margin-block: 1.5em;
+}
+.format-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.format-card h4 {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Mockups — visual ratio representations */
+.mockup-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--mockup-bg);
+  border-radius: 6px;
+  padding: 12px;
+  min-height: 100px;
+}
+.mockup-screen {
+  background: var(--mockup-inner);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #888;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  position: relative;
+  overflow: hidden;
+}
+.mockup-screen::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(201,54,74,0.15) 0%, transparent 60%);
+}
+/* Specific ratios */
+.ratio-9-16 { width: 50px; height: 89px; }
+.ratio-16-9 { width: 120px; height: 68px; }
+.ratio-1-1 { width: 70px; height: 70px; }
+.ratio-4-5 { width: 64px; height: 80px; }
+
+.format-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 0.72rem;
+}
+.spec {
+  background: var(--surface-alt);
+  padding: 3px 8px;
+  border-radius: 4px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.format-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Hooks section */
+.hooks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-block: 1em;
+}
+.hook-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  padding: 14px 18px;
+}
+.hook-item .hook-text {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1rem;
+  margin: 0 0 6px;
+  color: var(--text);
+}
+.hook-item .hook-why {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* Typo section */
+.typo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+  margin-block: 1em;
+}
+.typo-card {
+  background: var(--gold-soft);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+}
+.typo-card h4 {
+  margin: 0 0 6px;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.typo-card p {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* Visual hooks */
+.visual-hooks {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-block: 1em;
+}
+@media (max-width: 500px) {
+  .visual-hooks { grid-template-columns: 1fr; }
+}
+.vh-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.vh-visual {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  background: var(--mockup-bg);
+  position: relative;
+}
+.vh-half {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.vh-half--static { background: var(--mockup-inner); color: #666; }
+.vh-half--anim { background: linear-gradient(135deg, #C9364A33, #B8922D33); color: var(--accent); }
+.vh-divider {
+  width: 3px;
+  height: 100%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+.vh-body { padding: 14px 16px; }
+.vh-body h4 { margin: 0 0 4px; font-family: var(--sans); font-size: 0.85rem; font-weight: 600; }
+.vh-body p { margin: 0; font-size: 0.78rem; color: var(--text-muted); }
+
+/* Avatar section */
+.avatar-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-block: 1em;
+}
+@media (max-width: 500px) {
+  .avatar-compare { grid-template-columns: 1fr; }
+}
+.avatar-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+}
+.avatar-card h4 {
+  margin: 0 0 4px;
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.avatar-card .av-format {
+  font-size: 0.72rem;
+  color: var(--gold);
+  font-weight: 600;
+  margin: 0 0 10px;
+}
+.avatar-card p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+.avatar-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+.av-guide .avatar-icon { background: var(--accent-soft); }
+.av-pitch .avatar-icon { background: var(--gold-soft); }
+
+/* Bottom note */
+.reality-gate {
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  padding: 20px 24px;
+  margin-block: 2.5em;
+}
+.reality-gate h3 {
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin: 0 0 8px;
+}
+.reality-gate p {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+footer {
+  padding-block: 2em 1em;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-align: center;
+  border-top: 1px solid var(--border);
+  margin-top: 3em;
+}
+</style>
+
+<p class="eyebrow">Prod'AI — Production Vidéo IA Immobilier</p>
+<h1>Catalogue des formats de démo</h1>
+<p class="subtitle">Un scénario, plusieurs formats. Tout ce qu'on livre à un promoteur pour vendre son programme neuf sur les réseaux et sur son site.</p>
+
+<div class="case-badge">
+  <span class="case-dot"></span>
+  <div>
+    <strong>Cas d'étude : 63 Perrotin</strong><br>
+    <span>Châtillon (92) · BNP Paribas RE · 112 lots · à partir de 216 000 € · Livraison T2 2029</span>
+  </div>
+</div>
+
+<!-- SCENARIO -->
+<h2>Le scénario (identique pour tous les formats)</h2>
+<p style="font-size:0.85rem; color:var(--text-muted); margin-block:0 1.5em;">Un seul scénario narratif est produit. Il est ensuite découpé et recadré selon chaque format de sortie. Rien n'est retourné — tout est de l'adaptation.</p>
+
+<div class="flow">
+  <div class="flow-step">
+    <div class="flow-num">01</div>
+    <div class="flow-body">
+      <p class="flow-time">0 — 3 sec</p>
+      <h4>Hook</h4>
+      <p>Texte animé sur fond de la façade 3D avec légère rotation de caméra (effet parallaxe). Accroche : « Et si votre programme se vendait avant même d'être construit ? »</p>
+    </div>
+    <div class="flow-line"></div>
+  </div>
+  <div class="flow-step">
+    <div class="flow-num">02</div>
+    <div class="flow-body">
+      <p class="flow-time">3 — 15 sec</p>
+      <h4>Immersion intérieure</h4>
+      <p>Animation des visuels 3D existants du promoteur : travelling lent dans le salon, transition vers la chambre, changement de lumière matin → soir, particules flottantes dans la lumière.</p>
+    </div>
+    <div class="flow-line"></div>
+  </div>
+  <div class="flow-step">
+    <div class="flow-num">03</div>
+    <div class="flow-body">
+      <p class="flow-time">15 — 22 sec</p>
+      <h4>Quartier & localisation</h4>
+      <p>Carte animée zoomant sur Châtillon → rue Perrotin. Icônes qui apparaissent : Métro 13, Tramway T6, Coulée Verte. Texte : « À 15 min de Montparnasse ».</p>
+    </div>
+    <div class="flow-line"></div>
+  </div>
+  <div class="flow-step">
+    <div class="flow-num">04</div>
+    <div class="flow-body">
+      <p class="flow-time">22 — 30 sec</p>
+      <h4>Offre & appel à l'action</h4>
+      <p>Prix animé « À partir de 216 000 € », badge « Frais de notaire offerts », CTA « Réservez votre visite » + QR code ou numéro.</p>
+    </div>
+    <div class="flow-line"></div>
+  </div>
+  <div class="flow-step">
+    <div class="flow-num">05</div>
+    <div class="flow-body">
+      <p class="flow-time">30 — 35 sec</p>
+      <h4>Branding promoteur</h4>
+      <p>Logo BNP Paribas Real Estate + logo du programme. Packshot final.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FORMATS -->
+<h2>Les formats livrés</h2>
+<p style="font-size:0.85rem; color:var(--text-muted); margin-block:0 0.5em;">Chaque format est un recadrage + remontage du même scénario. Pas de tournage supplémentaire.</p>
+
+<div class="formats-grid">
+  <!-- Reels -->
+  <div class="format-card">
+    <h4><span class="tag tag--accent">Principal</span> Reels / TikTok</h4>
+    <div class="mockup-wrap">
+      <div class="mockup-screen ratio-9-16">9:16</div>
+    </div>
+    <div class="format-specs">
+      <span class="spec">9:16 vertical</span>
+      <span class="spec">30 sec</span>
+      <span class="spec">1080×1920</span>
+    </div>
+    <p class="format-desc">Le format roi des réseaux. Scénario complet (séquences 1→5). Optimisé pour le scroll-stop sur Instagram, TikTok, YouTube Shorts.</p>
+  </div>
+
+  <!-- Site web -->
+  <div class="format-card">
+    <h4><span class="tag tag--accent">Principal</span> Site web</h4>
+    <div class="mockup-wrap">
+      <div class="mockup-screen ratio-16-9">16:9</div>
+    </div>
+    <div class="format-specs">
+      <span class="spec">16:9 horizontal</span>
+      <span class="spec">45 sec</span>
+      <span class="spec">1920×1080</span>
+    </div>
+    <p class="format-desc">Version longue pour la page du programme sur le site du promoteur ou les portails (SeLoger, Bien'ici). Plus de temps sur l'immersion intérieure.</p>
+  </div>
+
+  <!-- Story -->
+  <div class="format-card">
+    <h4>Story / Pub</h4>
+    <div class="mockup-wrap">
+      <div class="mockup-screen ratio-9-16">9:16</div>
+    </div>
+    <div class="format-specs">
+      <span class="spec">9:16 vertical</span>
+      <span class="spec">15 sec</span>
+      <span class="spec">1080×1920</span>
+    </div>
+    <p class="format-desc">Version courte : hook + 1 pièce + CTA. Pensée pour les stories Instagram/Facebook et les publicités Meta Ads (format le plus performant en CPM).</p>
+  </div>
+
+  <!-- Carrousel -->
+  <div class="format-card">
+    <h4>Carrousel animé</h4>
+    <div class="mockup-wrap">
+      <div class="mockup-screen ratio-4-5">4:5</div>
+    </div>
+    <div class="format-specs">
+      <span class="spec">4:5 ou 1:1</span>
+      <span class="spec">5 slides × 5 sec</span>
+      <span class="spec">1080×1350</span>
+    </div>
+    <p class="format-desc">Chaque slide = une pièce qui s'anime. Slide 1 = hook, slides 2-4 = salon/chambre/cuisine, slide 5 = prix + CTA. Instagram & LinkedIn.</p>
+  </div>
+
+  <!-- LinkedIn -->
+  <div class="format-card">
+    <h4>LinkedIn natif</h4>
+    <div class="mockup-wrap">
+      <div class="mockup-screen ratio-1-1">1:1</div>
+    </div>
+    <div class="format-specs">
+      <span class="spec">1:1 carré</span>
+      <span class="spec">30-60 sec</span>
+      <span class="spec">1080×1080</span>
+    </div>
+    <p class="format-desc">Format carré optimisé pour le feed LinkedIn. Ton plus professionnel, sous-titres intégrés. Pour toucher les investisseurs et prescripteurs B2B.</p>
+  </div>
+
+  <!-- Pub display -->
+  <div class="format-card">
+    <h4>Bannière animée</h4>
+    <div class="mockup-wrap">
+      <div class="mockup-screen" style="width:120px;height:40px;border-radius:2px;">16:5</div>
+    </div>
+    <div class="format-specs">
+      <span class="spec">Landscape ultra-wide</span>
+      <span class="spec">6 sec loop</span>
+      <span class="spec">728×90 / 970×250</span>
+    </div>
+    <p class="format-desc">Bannière web animée pour le display programmatique (Google Ads, retargeting). Boucle courte : 1 visuel qui s'anime + prix + CTA.</p>
+  </div>
+</div>
+
+<!-- DÉCLINAISON PAR TYPOLOGIE -->
+<h2>Déclinaison par typologie</h2>
+<p style="font-size:0.85rem; color:var(--text-muted); margin-block:0 0.5em;">Même template vidéo, contenu personnalisé par type d'appartement. Permet au promoteur de cibler ses pubs par profil d'acheteur.</p>
+
+<div class="typo-grid">
+  <div class="typo-card">
+    <h4>Version Studio</h4>
+    <p>Visuels : salon/coin nuit compact<br>
+    Prix affiché : « À partir de 216 000 € »<br>
+    Cible : investisseurs locatifs, primo-accédants seuls</p>
+  </div>
+  <div class="typo-card">
+    <h4>Version 2-3 pièces</h4>
+    <p>Visuels : séjour + chambre + cuisine<br>
+    Prix affiché : gamme intermédiaire<br>
+    Cible : jeunes couples, primo-accédants</p>
+  </div>
+  <div class="typo-card">
+    <h4>Version 4-5 pièces</h4>
+    <p>Visuels : grands espaces, terrasse, vue<br>
+    Prix affiché : gamme haute<br>
+    Cible : familles, résidence principale premium</p>
+  </div>
+</div>
+
+<!-- HOOKS TEXTUELS -->
+<h2>Hooks textuels</h2>
+<p style="font-size:0.85rem; color:var(--text-muted); margin-block:0 0.5em;">Phrases d'accroche des 2 premières secondes. Fonctionnent dans tous les formats, toutes les tailles.</p>
+
+<div class="hooks-list">
+  <div class="hook-item">
+    <p class="hook-text">« 112 familles vivront ici. Aucune ne l'a encore vu bouger. »</p>
+    <p class="hook-why">Crée le manque. Le spectateur veut être le premier à voir.</p>
+  </div>
+  <div class="hook-item">
+    <p class="hook-text">« Vous vendez du rêve sur plan. On le rend réel. »</p>
+    <p class="hook-why">Parle directement au promoteur (B2B). Idéal pour LinkedIn ou cold outreach.</p>
+  </div>
+  <div class="hook-item">
+    <p class="hook-text">« Ce salon n'existe pas encore. Mais vous venez de vous y installer. »</p>
+    <p class="hook-why">Brise la frontière réel/virtuel. Le spectateur est déjà projeté dedans.</p>
+  </div>
+  <div class="hook-item">
+    <p class="hook-text">« Vos concurrents ont des photos. Vous aurez un film. »</p>
+    <p class="hook-why">Joue sur la compétition entre promoteurs. Déclenche l'urgence d'innover.</p>
+  </div>
+</div>
+
+<!-- HOOKS VISUELS -->
+<h2>Hooks visuels</h2>
+<p style="font-size:0.85rem; color:var(--text-muted); margin-block:0 0.5em;">Techniques visuelles pour les 2 premières secondes — indépendantes du format (marchent en vertical et horizontal).</p>
+
+<div class="visual-hooks">
+  <div class="vh-card">
+    <div class="vh-visual">
+      <div class="vh-half vh-half--static">IMAGE<br>FIXE</div>
+      <div class="vh-divider"></div>
+      <div class="vh-half vh-half--anim">IMAGE<br>ANIMÉE</div>
+    </div>
+    <div class="vh-body">
+      <h4>Split Screen</h4>
+      <p>À gauche ce que le promoteur a aujourd'hui (image fixe), à droite ce qu'on propose (la même, animée). Le contraste vend tout seul.</p>
+    </div>
+  </div>
+  <div class="vh-card">
+    <div class="vh-visual" style="background: linear-gradient(90deg, var(--mockup-inner) 50%, rgba(201,54,74,0.2) 50%); justify-content:center;">
+      <div style="width:3px;height:60%;background:var(--accent);border-radius:2px;position:relative;">
+        <div style="position:absolute;top:-6px;left:-5px;width:13px;height:13px;background:var(--accent);border-radius:50%;"></div>
+      </div>
+    </div>
+    <div class="vh-body">
+      <h4>Before / After Slider</h4>
+      <p>Un curseur glisse de la photo statique vers la version animée avec lumière et mouvement. Interactif en story, filmé en Reel.</p>
+    </div>
+  </div>
+  <div class="vh-card">
+    <div class="vh-visual" style="flex-direction:column;gap:4px;">
+      <div style="color:#666;font-size:0.55rem;font-weight:700;letter-spacing:0.1em;">LE SPECTATEUR CROIT QUE C'EST UNE PHOTO…</div>
+      <div style="color:var(--accent);font-size:0.55rem;font-weight:700;">PUIS ÇA BOUGE</div>
+    </div>
+    <div class="vh-body">
+      <h4>Faux-fixe → mouvement</h4>
+      <p>La vidéo démarre sur une image immobile 1-2 sec, puis un mouvement de caméra inattendu. Scroll-stopper garanti.</p>
+    </div>
+  </div>
+  <div class="vh-card">
+    <div class="vh-visual" style="gap:8px;">
+      <div style="width:30px;height:30px;border-radius:4px;background:var(--mockup-inner);display:flex;align-items:center;justify-content:center;font-size:0.5rem;color:#666;">T=0</div>
+      <div style="color:var(--accent);font-size:1rem;">→</div>
+      <div style="width:30px;height:30px;border-radius:4px;background:linear-gradient(135deg,#C9364A33,#B8922D33);display:flex;align-items:center;justify-content:center;font-size:0.5rem;color:var(--accent);">T=10</div>
+    </div>
+    <div class="vh-body">
+      <h4>Timelapse IA</h4>
+      <p>Du terrain vague au bâtiment fini en 10 secondes. Effet « wow » immédiat. Fonctionne comme hook ou comme format autonome.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FORMATS ADDITIONNELS AVATAR -->
+<h2>Formats avec avatar</h2>
+
+<div class="avatar-compare">
+  <div class="avatar-card av-guide">
+    <div class="avatar-icon">🏠</div>
+    <h4>Avatar guide intérieur</h4>
+    <p class="av-format">60-90 sec · 9:16 ou 16:9 · Visite immersive</p>
+    <p>L'avatar apparaît DANS les pièces en 3D. Il marche et commente chaque espace : « Bienvenue dans votre futur salon de 35 m²… la lumière naturelle entre par ces baies vitrées toute la journée. »</p>
+    <p style="margin-top:8px;"><strong>Usage :</strong> page programme du site, YouTube, envoi par email aux leads qualifiés. Remplace la visite physique pour les acheteurs à distance.</p>
+  </div>
+  <div class="avatar-card av-pitch">
+    <div class="avatar-icon">🎤</div>
+    <h4>Avatar vendeur face caméra</h4>
+    <p class="av-format">30 sec · 9:16 · Reels / LinkedIn</p>
+    <p>L'avatar est filmé en buste, fond neutre ou avec le visuel 3D derrière lui. Il pitch le programme en 30 sec comme un commercial : « Nouveau programme à Châtillon, 112 logements, à 15 min de Montparnasse… »</p>
+    <p style="margin-top:8px;"><strong>Usage :</strong> Reels, LinkedIn, publicités Meta. Donne un visage humain au programme sans mobiliser un vrai commercial pour chaque vidéo.</p>
+  </div>
+</div>
+
+<!-- VISITE NARRÉE -->
+<h3>Visite virtuelle narrée (combiné)</h3>
+<p style="font-size:0.85rem; color:var(--text-muted); max-width:60ch;">Le format le plus premium : l'avatar guide apparaît dans les pièces ET une voix off IA narrate par-dessus les transitions. Durée 60-90 sec, livré en 16:9 (site) et 9:16 (Reels long). C'est le format qui remplace une visite de showroom.</p>
+
+<!-- REALITY GATE -->
+<div class="reality-gate">
+  <h3>Reality Gate — par où commencer</h3>
+  <p>Avant de produire les 8 formats : <strong>une seule vidéo de 30 sec</strong> (Reels 9:16, séquences 1→4) sur le cas 63 Perrotin. C'est cette vidéo qui devient le cold outreach aux directeurs marketing des 5 plus gros promoteurs. La vidéo EST le pitch. Pas besoin de deck, pas besoin de site.</p>
+</div>
+
+<footer>
+  Prod'AI by Collection Privée · Catalogue de formats — Cas d'étude 63 Perrotin, Châtillon<br>
+  Document de travail interne · Septembre 2026
+</footer>

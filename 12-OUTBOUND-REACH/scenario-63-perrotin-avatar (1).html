@@ -1,0 +1,714 @@
+<title>63 Perrotin — Scénarios</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+:root {
+  --bg: #F5F3EE;
+  --surface: #FFFFFF;
+  --surface-alt: #ECE9E1;
+  --text: #1B1B1D;
+  --text-muted: #6D6861;
+  --accent: #C73B4E;
+  --accent-soft: #C73B4E14;
+  --blue: #1A5276;
+  --blue-soft: #1A527612;
+  --gold: #B08D2A;
+  --gold-soft: #B08D2A12;
+  --green: #2D7D46;
+  --green-soft: #2D7D4612;
+  --border: #D6D1C8;
+  --mockup-bg: #222226;
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'Inter', system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111114;
+    --surface: #1B1B1F;
+    --surface-alt: #252529;
+    --text: #E6E3DD;
+    --text-muted: #8E8880;
+    --accent: #E5657A;
+    --accent-soft: #E5657A1C;
+    --blue: #5BA3D9;
+    --blue-soft: #5BA3D916;
+    --gold: #D4A74F;
+    --gold-soft: #D4A74F16;
+    --green: #5BBF73;
+    --green-soft: #5BBF7316;
+    --border: #333338;
+    --mockup-bg: #0B0B0D;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111114;
+  --surface: #1B1B1F;
+  --surface-alt: #252529;
+  --text: #E6E3DD;
+  --text-muted: #8E8880;
+  --accent: #E5657A;
+  --accent-soft: #E5657A1C;
+  --blue: #5BA3D9;
+  --blue-soft: #5BA3D916;
+  --gold: #D4A74F;
+  --gold-soft: #D4A74F16;
+  --green: #5BBF73;
+  --green-soft: #5BBF7316;
+  --border: #333338;
+  --mockup-bg: #0B0B0D;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  line-height: 1.65;
+  padding-inline: 20px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+h1, h2, h3 { font-family: var(--serif); font-weight: 400; line-height: 1.2; }
+h1 { font-size: clamp(1.7rem, 4.5vw, 2.4rem); margin-block: 0 0.25em; }
+h2 { font-size: clamp(1.2rem, 3vw, 1.6rem); margin-block: 2.5em 0.6em; }
+h3 { font-size: 1.1rem; margin-block: 1.8em 0.5em; }
+
+.eyebrow {
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-block: 0 0.5em;
+}
+.lead { color: var(--text-muted); font-size: 0.92rem; max-width: 52ch; margin-block: 0 2em; }
+
+/* Shared block */
+.shared-block {
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin-block: 1.5em;
+}
+.shared-block h4 {
+  margin: 0 0 6px;
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.shared-block p {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+/* Option tabs */
+.options-nav {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid var(--border);
+  margin-block: 2em 0;
+}
+.opt-tab {
+  padding: 10px 20px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: color 0.2s, border-color 0.2s;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  font-family: var(--sans);
+}
+.opt-tab:hover { color: var(--text); }
+.opt-tab.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+.opt-content { display: none; padding-top: 1.5em; }
+.opt-content.active { display: block; }
+
+/* Timeline */
+.timeline { margin-block: 1em; }
+.tl-row {
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  gap: 0 16px;
+  padding-block: 14px;
+  border-bottom: 1px solid var(--border);
+}
+.tl-row:last-child { border-bottom: none; }
+.tl-time {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--gold);
+  padding-top: 2px;
+  font-variant-numeric: tabular-nums;
+}
+.tl-content h4 {
+  margin: 0 0 4px;
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+.tl-content p {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+.tl-visual {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--blue);
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.tl-visual::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--blue);
+  flex-shrink: 0;
+}
+.tl-avatar {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--green);
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.tl-avatar::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  flex-shrink: 0;
+}
+.tl-voiceover {
+  font-size: 0.82rem;
+  font-style: italic;
+  color: var(--text);
+  margin-top: 6px;
+  padding-left: 12px;
+  border-left: 2px solid var(--gold);
+}
+
+/* Layout diagram */
+.layout-diagram {
+  background: var(--mockup-bg);
+  border-radius: 10px;
+  padding: 20px;
+  margin-block: 1.5em;
+  display: flex;
+  justify-content: center;
+}
+.phone-frame {
+  width: 140px;
+  height: 250px;
+  border: 2px solid #555;
+  border-radius: 16px;
+  background: #2a2a2e;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.phone-notch {
+  width: 50px;
+  height: 8px;
+  background: var(--mockup-bg);
+  border-radius: 0 0 6px 6px;
+  margin: 0 auto;
+  flex-shrink: 0;
+}
+.phone-content {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.phone-bg {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.5rem;
+  color: #666;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+.phone-avatar-a {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.phone-avatar-a .av-silhouette {
+  width: 60px;
+  height: 120px;
+  background: linear-gradient(180deg, transparent 0%, rgba(93,74,224,0.3) 50%, rgba(93,74,224,0.5) 100%);
+  border-radius: 30px 30px 0 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 10px;
+}
+.phone-avatar-a .av-head {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(93,74,224,0.6);
+}
+.phone-avatar-b {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+}
+.av-circle-b {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(93,74,224,0.5), rgba(93,74,224,0.8));
+  border: 2px solid rgba(255,255,255,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.4rem;
+  color: #fff;
+  font-weight: 700;
+}
+.diagram-label {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: #999;
+  letter-spacing: 0.05em;
+}
+
+/* Resources */
+.resources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+  margin-block: 1em;
+}
+.res-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+.res-card h4 {
+  margin: 0 0 6px;
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+.res-card p {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+.res-card a {
+  font-size: 0.72rem;
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+  display: inline-block;
+  margin-top: 6px;
+}
+.res-card a:hover { text-decoration: underline; }
+.res-tag {
+  display: inline-block;
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 2px 6px;
+  border-radius: 3px;
+  margin-bottom: 8px;
+}
+.res-tag--3d { background: var(--blue-soft); color: var(--blue); }
+.res-tag--quartier { background: var(--green-soft); color: var(--green); }
+.res-tag--transport { background: var(--gold-soft); color: var(--gold); }
+
+footer {
+  padding-block: 2em 1em;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  text-align: center;
+  border-top: 1px solid var(--border);
+  margin-top: 3em;
+}
+</style>
+
+<p class="eyebrow">Prod'AI — 63 Perrotin, Châtillon</p>
+<h1>Scénarios vidéo avatar</h1>
+<p class="lead">Deux options de mise en scène avec avatar. Même intro (hook + façade) et même outro (offre + CTA + branding). Seul le corps de la vidéo change.</p>
+
+<!-- PARTIE COMMUNE : INTRO -->
+<div class="shared-block">
+  <h4>Intro commune aux 2 options (0 — 5 sec)</h4>
+  <p><strong>Hook textuel</strong> animé sur fond de la façade 3D extérieure en légère rotation parallaxe.<br>
+  Texte : « Ce salon n'existe pas encore. Mais vous venez de vous y installer. »<br>
+  <strong>Visuel source :</strong> Façade 3D — vue piétonne avec allée végétalisée.</p>
+</div>
+
+<!-- TABS -->
+<div class="options-nav">
+  <button class="opt-tab active" onclick="switchTab('a')">Option A — Guide intérieur</button>
+  <button class="opt-tab" onclick="switchTab('b')">Option B — Présentateur coin</button>
+</div>
+
+<!-- OPTION A -->
+<div id="opt-a" class="opt-content active">
+
+  <h3>Option A : L'avatar marche dans les pièces</h3>
+  <p style="font-size:0.85rem;color:var(--text-muted);max-width:55ch;">L'avatar est intégré EN PLEIN ÉCRAN dans les visuels 3D. Il se tient debout dans chaque pièce, fait des gestes vers les éléments, et guide le spectateur comme une vraie visite. Format immersif.</p>
+
+  <!-- DIAGRAM -->
+  <div class="layout-diagram">
+    <div>
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-content">
+          <div class="phone-bg">VISUEL 3D<br>PLEIN ÉCRAN</div>
+          <div class="phone-avatar-a">
+            <div class="av-silhouette"><div class="av-head"></div></div>
+          </div>
+        </div>
+      </div>
+      <p class="diagram-label">AVATAR AU CENTRE<br>dans la pièce</p>
+    </div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="timeline">
+    <div class="tl-row">
+      <div class="tl-time">0:00 — 0:05</div>
+      <div class="tl-content">
+        <h4>Hook + Façade</h4>
+        <p>Intro commune. Texte animé sur façade 3D en parallaxe.</p>
+        <div class="tl-visual">Visuel : façade extérieure végétalisée</div>
+      </div>
+    </div>
+
+    <div class="tl-row">
+      <div class="tl-time">0:05 — 0:12</div>
+      <div class="tl-content">
+        <h4>Entrée dans le salon</h4>
+        <p>Transition fondu : on passe de la façade à l'intérieur. L'avatar apparaît debout dans le salon (visuel mur bleu pétrole), face caméra. Il fait un geste d'accueil vers l'espace.</p>
+        <div class="tl-visual">Visuel : salon mur bleu pétrole — fauteuils design, double hauteur</div>
+        <div class="tl-avatar">Avatar : debout au centre, geste d'accueil bras ouvert</div>
+        <div class="tl-voiceover">« Bienvenue dans votre futur salon. Double exposition, 35 mètres carrés de lumière naturelle toute la journée. »</div>
+      </div>
+    </div>
+
+    <div class="tl-row">
+      <div class="tl-time">0:12 — 0:20</div>
+      <div class="tl-content">
+        <h4>Séjour / salle à manger</h4>
+        <p>L'avatar « marche » vers la droite (transition glissée). Nouveau visuel : le séjour avec lustre design et baies vitrées. L'avatar pointe vers la vue panoramique à travers les fenêtres.</p>
+        <div class="tl-visual">Visuel : séjour lumineux — lustre doré, grandes baies, vue panoramique</div>
+        <div class="tl-avatar">Avatar : de profil, pointe vers la fenêtre panoramique</div>
+        <div class="tl-voiceover">« L'espace repas donne directement sur la vue. Ce lustre ? Il est inclus dans les prestations haut de gamme du programme. »</div>
+      </div>
+    </div>
+
+    <div class="tl-row">
+      <div class="tl-time">0:20 — 0:28</div>
+      <div class="tl-content">
+        <h4>La terrasse</h4>
+        <p>Transition fluide vers l'extérieur. L'avatar apparaît sur la terrasse, s'assied symboliquement ou reste debout près du mobilier outdoor. Lumière dorée (fin de journée).</p>
+        <div class="tl-visual">Visuel : terrasse avec mobilier, parasol, vue sur les toits</div>
+        <div class="tl-avatar">Avatar : debout côté gauche, geste vers la vue</div>
+        <div class="tl-voiceover">« Et pour finir la journée… votre terrasse privative. Vue dégagée sur les toits de Châtillon, à 15 minutes de Montparnasse. »</div>
+      </div>
+    </div>
+
+    <div class="tl-row">
+      <div class="tl-time">0:28 — 0:35</div>
+      <div class="tl-content">
+        <h4>Quartier — coulée verte + transports</h4>
+        <p>L'avatar disparaît. Séquence rapide : photo coulée verte du sud parisien → icônes animées métro 13 / T6 / Grand Paris Express L15 → carte zoomant sur Châtillon.</p>
+        <div class="tl-visual">Visuels : photo coulée verte + icônes transports animées</div>
+        <div class="tl-voiceover">« Écoquartier des Arues. Coulée verte au pied de l'immeuble. Métro, tram, et bientôt le Grand Paris Express. »</div>
+      </div>
+    </div>
+
+    <div class="tl-row">
+      <div class="tl-time">0:35 — 0:45</div>
+      <div class="tl-content">
+        <h4>Offre + CTA + Branding</h4>
+        <p>Outro commune. Prix animé, badge offre spéciale, CTA, logos.</p>
+        <div class="tl-visual">Animation texte : « À partir de 216 000 € · Frais de notaire offerts »</div>
+        <div class="tl-voiceover">« À partir de 216 000 euros. Frais de notaire offerts. Réservez votre visite dès maintenant. »</div>
+      </div>
+    </div>
+  </div>
+
+  <p style="font-size:0.82rem;color:var(--text-muted);margin-top:1em;"><strong>Durée totale :</strong> 45 secondes · <strong>Format principal :</strong> 9:16 (Reels) + 16:9 (site web) · <strong>Ton :</strong> chaleureux, professionnel, comme un agent qui vous fait visiter</p>
+</div>
+
+<!-- OPTION B -->
+<div id="opt-b" class="opt-content">
+
+  <h3>Option B : Avatar présentateur en coin</h3>
+  <p style="font-size:0.85rem;color:var(--text-muted);max-width:55ch;">L'avatar est en MÉDAILLON en bas à droite (style PiP / picture-in-picture). Le fond plein écran = les visuels 3D qui s'animent. L'avatar commente par-dessus sans entrer dans la scène. Format présentateur.</p>
+
+  <!-- DIAGRAM -->
+  <div class="layout-diagram">
+    <div>
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-content">
+          <div class="phone-bg">ANIMATION 3D<br>PLEIN ÉCRAN</div>
+          <div class="phone-avatar-b">
+            <div class="av-circle-b">AVATAR</div>
+          </div>
+        </div>
+      </div>
+      <p class="diagram-label">AVATAR EN MÉDAILLON<br>bas droite (PiP)</p>
+    </div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="timeline">
+    <div class="tl-row">
+      <div class="tl-time">0:00 — 0:05</div>
+      <div class="tl-content">
+        <h4>Hook + Façade</h4>
+        <p>Intro commune. Texte animé sur façade 3D en parallaxe. L'avatar n'est PAS encore visible.</p>
+        <div class="tl-visual">Visuel : façade extérieure végétalisée, plein écran</div>
+      </div>
+    </div>
+
+    <div class="tl-row">
+      <div class="tl-time">0:05 — 0:08</div>
+      <div class="tl-content">
+        <h4>Apparition de l'avatar</h4>
+        <p>Le médaillon avatar pop en bas à droite avec une micro-animation (scale-in + ombre). L'avatar salue et commence à parler. En arrière-plan : travelling lent dans le salon.</p>
+        <div class="tl-visual">Fond : salon mur bleu pétrole — travelling lent de gauche à droite</div>
+        <div class="tl-avatar">Avatar PiP : apparition, salut, commence à parler</div>
+        <div class="tl-voiceover">« Bonjour ! Laissez-moi vous faire découvrir le 63 Perrotin, le nouveau programme de Châtillon. »</div>
+      </div>
+    </div>
+
+    <div class="tl-row">
+      <div class="tl-time">0:08 — 0:15</div>
+      <div class="tl-content">
+        <h4>Salon — animation complète</h4>
+        <p>L'animation 3D du salon occupe tout l'écran : zoom lent, changement de lumière (matin → après-midi), particules dans la lumière. L'avatar en PiP commente en continu.</p>
+        <div class="tl-visual">Fond : salon → zoom sur les détails déco → lumière qui change</div>
+        <div class="tl-avatar">Avatar PiP : gestes de présentation, regard vers le haut (suit la lumière)</div>
+        <div class="tl-voiceover">« 35 mètres carrés de séjour, double exposition. Regardez cette lumière… elle change tout au long de la journée. »</div>
+      </div>
+    </div>
+
+    <div class="tl-row">
+      <div class="tl-time">0:15 — 0:22</div>
+      <div class="tl-content">
+        <h4>Séjour + Terrasse enchaînés</h4>
+        <p>Transition fondu entre le séjour (lustre, baies) et la terrasse (mobilier outdoor). L'animation est continue, l'avatar reste en PiP et commente la transition.</p>
+        <div class="tl-visual">Fond : séjour lumineux → fondu → terrasse avec vue sur les toits</div>
+        <div class="tl-avatar">Avatar PiP : pointe vers le haut-gauche quand la terrasse apparaît</div>
+        <div class="tl-voiceover">« De la salle à manger, vous passez directement sur votre terrasse privative. Vue dégagée, plein sud. »</div>
+      </div>
+    </div>
+
+    <div class="tl-row">
+      <div class="tl-time">0:22 — 0:28</div>
+      <div class="tl-content">
+        <h4>Quartier — coulée verte + transports</h4>
+        <p>Le médaillon avatar se réduit légèrement. Le fond passe en mode « quartier » : photo de la coulée verte, puis icônes transports animées, puis carte de localisation.</p>
+        <div class="tl-visual">Fond : photo coulée verte → icônes métro 13 / T6 / L15 → mini-carte</div>
+        <div class="tl-avatar">Avatar PiP : plus petit, continue de commenter</div>
+        <div class="tl-voiceover">« Côté quartier : la coulée verte au pied de la résidence, le métro 13 et le tram T6 à 10 minutes à pied. »</div>
+      </div>
+    </div>
+
+    <div class="tl-row">
+      <div class="tl-time">0:28 — 0:35</div>
+      <div class="tl-content">
+        <h4>Offre + CTA + Branding</h4>
+        <p>Outro commune. Le médaillon avatar disparaît (fade-out). Prix animé, badge offre spéciale, CTA, logos du promoteur.</p>
+        <div class="tl-visual">Animation texte : « À partir de 216 000 € · Frais de notaire offerts »</div>
+        <div class="tl-voiceover">« À partir de 216 000 euros, frais de notaire offerts. Lien en bio pour réserver. »</div>
+      </div>
+    </div>
+  </div>
+
+  <p style="font-size:0.82rem;color:var(--text-muted);margin-top:1em;"><strong>Durée totale :</strong> 35 secondes · <strong>Format principal :</strong> 9:16 (Reels) + 16:9 (site web) · <strong>Ton :</strong> dynamique, type influenceur immobilier, plus rapide que l'option A</p>
+</div>
+
+<!-- COMPARAISON -->
+<h2>Comparaison des deux options</h2>
+
+<div style="overflow-x:auto;">
+<table style="width:100%;border-collapse:collapse;font-size:0.82rem;margin-block:1em;">
+  <thead>
+    <tr style="border-bottom:2px solid var(--border);">
+      <th style="text-align:left;padding:8px 12px;font-weight:600;"></th>
+      <th style="text-align:left;padding:8px 12px;font-weight:600;color:var(--accent);">Option A — Guide intérieur</th>
+      <th style="text-align:left;padding:8px 12px;font-weight:600;color:var(--blue);">Option B — Présentateur coin</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="border-bottom:1px solid var(--border);">
+      <td style="padding:8px 12px;font-weight:600;">Position avatar</td>
+      <td style="padding:8px 12px;">Plein écran, dans la pièce</td>
+      <td style="padding:8px 12px;">Médaillon bas-droite (PiP)</td>
+    </tr>
+    <tr style="border-bottom:1px solid var(--border);">
+      <td style="padding:8px 12px;font-weight:600;">Durée</td>
+      <td style="padding:8px 12px;">45 sec</td>
+      <td style="padding:8px 12px;">35 sec</td>
+    </tr>
+    <tr style="border-bottom:1px solid var(--border);">
+      <td style="padding:8px 12px;font-weight:600;">Visuel 3D</td>
+      <td style="padding:8px 12px;">Partiellement caché par l'avatar</td>
+      <td style="padding:8px 12px;">100 % visible, plein écran</td>
+    </tr>
+    <tr style="border-bottom:1px solid var(--border);">
+      <td style="padding:8px 12px;font-weight:600;">Sensation</td>
+      <td style="padding:8px 12px;">Visite guidée immersive (comme avec un agent)</td>
+      <td style="padding:8px 12px;">Vidéo commentée par un expert (style YouTube/Reels)</td>
+    </tr>
+    <tr style="border-bottom:1px solid var(--border);">
+      <td style="padding:8px 12px;font-weight:600;">Complexité production</td>
+      <td style="padding:8px 12px;">Plus élevée (intégration avatar dans la scène)</td>
+      <td style="padding:8px 12px;">Plus simple (superposition PiP)</td>
+    </tr>
+    <tr style="border-bottom:1px solid var(--border);">
+      <td style="padding:8px 12px;font-weight:600;">Meilleur usage</td>
+      <td style="padding:8px 12px;">Site web du promoteur, email aux leads chauds</td>
+      <td style="padding:8px 12px;">Reels, LinkedIn, publicités Meta</td>
+    </tr>
+    <tr>
+      <td style="padding:8px 12px;font-weight:600;">Intro & Outro</td>
+      <td style="padding:8px 12px;color:var(--green);font-weight:600;">Identiques</td>
+      <td style="padding:8px 12px;color:var(--green);font-weight:600;">Identiques</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<!-- RESSOURCES VISUELLES -->
+<h2>Ressources visuelles collectées</h2>
+
+<h3>Visuels 3D du programme (depuis SeLoger)</h3>
+<div class="resources-grid">
+  <div class="res-card">
+    <span class="res-tag res-tag--3d">3D Extérieur</span>
+    <h4>Façade avec allée piétonne</h4>
+    <p>Vue d'ensemble, végétation, piétons. Idéal pour le hook d'ouverture.</p>
+  </div>
+  <div class="res-card">
+    <span class="res-tag res-tag--3d">3D Extérieur</span>
+    <h4>Vue aérienne terrasses</h4>
+    <p>Angle plongeant sur les balcons et terrasses végétalisées.</p>
+  </div>
+  <div class="res-card">
+    <span class="res-tag res-tag--3d">3D Extérieur</span>
+    <h4>Tour principale</h4>
+    <p>Façade bois + balcons. Vue rapprochée montrant les matériaux.</p>
+  </div>
+  <div class="res-card">
+    <span class="res-tag res-tag--3d">3D Extérieur</span>
+    <h4>Vue depuis la rue</h4>
+    <p>Perspective depuis la rue Perrotin avec arbres et voitures.</p>
+  </div>
+  <div class="res-card">
+    <span class="res-tag res-tag--3d">3D Intérieur</span>
+    <h4>Salon — mur bleu pétrole</h4>
+    <p>Pièce principale avec fauteuils design, double hauteur, terrasse visible. Visuel clé pour la séquence salon.</p>
+  </div>
+  <div class="res-card">
+    <span class="res-tag res-tag--3d">3D Intérieur</span>
+    <h4>Séjour / salle à manger</h4>
+    <p>Grandes baies vitrées, lustre design doré, vue panoramique. Séquence salle à manger.</p>
+  </div>
+  <div class="res-card">
+    <span class="res-tag res-tag--3d">3D Extérieur</span>
+    <h4>Terrasse privative</h4>
+    <p>Mobilier outdoor, parasol, vue dégagée sur les toits. Séquence terrasse.</p>
+  </div>
+</div>
+
+<h3>Photos du quartier (sources libres)</h3>
+<div class="resources-grid">
+  <div class="res-card">
+    <span class="res-tag res-tag--quartier">Quartier</span>
+    <h4>Coulée verte du sud parisien</h4>
+    <p>12 km de promenade piétons/vélos, de Montparnasse à Massy. Passe à proximité du programme.</p>
+    <a href="https://www.ville-chatillon.fr/app/uploads/2023/03/Coulee_Verte_Metro_1-scaled.jpg" target="_blank">Source : Ville de Châtillon</a>
+  </div>
+  <div class="res-card">
+    <span class="res-tag res-tag--quartier">Quartier</span>
+    <h4>Coulée verte (Hauts-de-Seine)</h4>
+    <p>Paysages variés de l'urbain au boisé. Aires de jeux, parcours sportif, pique-nique.</p>
+    <a href="https://destination.hauts-de-seine.fr/coulee-verte-sud-paris-tgv-promenade-des-vallons-de-la-bievre-92.html" target="_blank">Source : Destination Hauts-de-Seine</a>
+  </div>
+  <div class="res-card">
+    <span class="res-tag res-tag--quartier">Quartier</span>
+    <h4>Parc Henri Matisse</h4>
+    <p>Parc municipal de Châtillon, avenue de la République — à proximité du programme.</p>
+    <a href="https://www.ville-chatillon.fr/app/uploads/2023/03/Parc_Henri_Matisse_-_Avril_2021_22-scaled.jpg" target="_blank">Source : Ville de Châtillon</a>
+  </div>
+  <div class="res-card">
+    <span class="res-tag res-tag--transport">Transport</span>
+    <h4>Station Châtillon-Montrouge (M13)</h4>
+    <p>Terminus de la ligne 13. Futur hub avec la ligne 15 du Grand Paris Express (fin 2026).</p>
+    <a href="https://en.wikipedia.org/wiki/Ch%C3%A2tillon%E2%80%93Montrouge_station" target="_blank">Source : Wikipedia</a>
+  </div>
+  <div class="res-card">
+    <span class="res-tag res-tag--transport">Transport</span>
+    <h4>Tramway T6</h4>
+    <p>Ligne Châtillon–Viroflay. Dessert directement le quartier des Arues.</p>
+    <a href="https://commons.wikimedia.org/wiki/File:%C3%89lus_devant_tram_inaugural_T6_par_Cramos.JPG" target="_blank">Source : Wikimedia Commons</a>
+  </div>
+  <div class="res-card">
+    <span class="res-tag res-tag--quartier">Quartier</span>
+    <h4>Écoquartier des Arues — projet</h4>
+    <p>105 000 m² de logements, 2 ha d'espaces verts, lycée, commerces. Coulée verte élargie.</p>
+    <a href="https://www.valleesud.fr/vos-services/urbanisme/projets-damenagements/projet-damenagement-du-quartier-des-arues-a-chatillon/" target="_blank">Source : Vallée Sud Grand Paris</a>
+  </div>
+</div>
+
+<footer>
+  Prod'AI by Collection Privée · Scénarios vidéo avatar — 63 Perrotin, Châtillon · Septembre 2026
+</footer>
+
+<script>
+function switchTab(opt) {
+  document.querySelectorAll('.opt-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.opt-content').forEach(c => c.classList.remove('active'));
+  document.getElementById('opt-' + opt).classList.add('active');
+  document.querySelectorAll('.opt-tab').forEach(t => {
+    if ((opt === 'a' && t.textContent.includes('Guide')) || (opt === 'b' && t.textContent.includes('Présentateur'))) {
+      t.classList.add('active');
+    }
+  });
+}
+</script>
